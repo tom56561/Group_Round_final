@@ -1,0 +1,35 @@
+#userComment {
+    border: 1px gray solid;
+    padding: 20px;
+    margin: 20px 0px;
+
+}
+
+#rightDiv img {
+    margin: 10px 0px 10px 0px;
+}
+
+#submitBtn {
+    margin-left: 30px;
+    margin-bottom: 10px;
+    width: 500px;
+   
+}
+#commentTopic{
+    margin-bottom: 20px;
+}
+#commentContent{
+    border-bottom: 1px gray solid;
+}
+
+#commentContent:last-of-type{
+    border-bottom: 0px;
+}
+
+#commentText,#commentStar,#commentImg{
+    height: 100px;
+    display: inline-flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+

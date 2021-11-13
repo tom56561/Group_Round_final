@@ -1,0 +1,61 @@
+
+
+        .AllCard {
+            display: inline-flex;
+
+
+        }
+
+        .card {
+            color: #41b2ac;
+            width: 200px;
+            height: 250px;
+        }
+
+        .card img {
+            width: 150px;
+        }
+
+        .AllCard a {
+            text-decoration: none;
+        }
+
+
+        #card1 {
+            margin: 6vh 0 0 2vw;
+            border-radius: 10px;
+            box-shadow: rgb(187, 187, 187) 3px 3px 3px 3px;
+
+        }
+
+
+        #card2 {
+            margin: 6vh 0 0 2vw;
+            border-radius: 10px;
+            box-shadow: rgb(187, 187, 187) 3px 3px 3px 3px;
+        }
+
+        #card3 {
+            margin: 6vh 0 0 2vw;
+            border-radius: 10px;
+            box-shadow: rgb(187, 187, 187) 3px 3px 3px 3px;
+        }
+
+        /* ---------------------------分隔線(看更多按鈕)--------------------------- */
+        #MoreButton {
+            display: inline-flex;
+            margin: 3vw 0vw 1vw 70vw;
+
+
+        }
+
+        /* ---------------------------分隔線(卡片hover)--------------------------- */
+
+        .card:hover {
+            margin: 6vh 0 0 2vw;
+            border-radius: 10px;
+            box-shadow: rgb(187, 187, 187) 3px 3px 3px 3px;
+            background-color: #41b2ac;
+            color: white;
+
+        }
