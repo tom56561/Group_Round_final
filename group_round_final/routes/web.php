@@ -25,21 +25,21 @@ Route::post('create', [UserAuthController::class, 'create'])->name('auth.create'
 Route::post('check', [UserAuthController::class, 'check'])->name('auth.check');
 
 // profile相關換成小馬的member
-Route::get('profile', [UserAuthController::class, 'profile'])->middleware('isLogged'); // isLogged在Kernel裡接到 Middlewares/AuthCheck 檢查有無登入狀態接這個
+Route::get('profile', [UserAuthController::class, 'profile'])->middleware('isLogged'); // isLogged在Kernel裡接到 Middlewares/AuthCheck 未登入會拒絕訪問
 //         換成其他名稱會出現 Bad Method Call 先用profile當會員中心
 
 Route::get('logout', [UserAuthController::class, 'logout']);
 //   ------------
 // member
 Route::get('/member/{id}', "App\Http\Controllers\MemberController@index")->name( 'member.index' );
-Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' );
-Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' );
-Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' );
-Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' );
-Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' );
+Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->middleware('isLogged')->name( 'member.join' );
+Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->middleware('isLogged')->name( 'member.create' );
+Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->middleware('isLogged')->name( 'member.finished' );
+Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->middleware('isLogged')->name( 'member.collect' );
+Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->middleware('isLogged')->name( 'member.comment' );
 
 // 修改會員資料
-Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' );
+Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
 Route::resource('/MemberAlter', 'App\Http\Controllers\MemberAlterController');
 //   ------------
 // serch
@@ -93,11 +93,11 @@ Route::get('/searchmetag8', function(){
 
 //   ------------
 // event
-Route::get('holdevent/{id}', 'App\Http\Controllers\EventController@index');
-Route::get('holdevent1', 'App\Http\Controllers\EventController@index1');
-Route::get('holdevent2', 'App\Http\Controllers\EventController@index2');
-Route::get('holdevent3', 'App\Http\Controllers\EventController@index3');
-Route::get('holdevent4', 'App\Http\Controllers\EventController@index4');
+Route::get('holdevent/{id}', 'App\Http\Controllers\EventController@index')->middleware('isLogged');
+Route::get('holdevent1', 'App\Http\Controllers\EventController@index1')->middleware('isLogged');
+Route::get('holdevent2', 'App\Http\Controllers\EventController@index2')->middleware('isLogged');
+Route::get('holdevent3', 'App\Http\Controllers\EventController@index3')->middleware('isLogged');
+Route::get('holdevent4', 'App\Http\Controllers\EventController@index4')->middleware('isLogged');
 Route::any('holdevent/store1', 'App\Http\Controllers\EventController@store1');
 Route::any('holdevent/store2', 'App\Http\Controllers\EventController@store2');
 Route::any('holdevent/store3', 'App\Http\Controllers\EventController@store3');
@@ -105,6 +105,6 @@ Route::any('holdevent/store3', 'App\Http\Controllers\EventController@store3');
 // feedback
 // 建庠的路由要麻煩重設，因為"/"已經給首頁了
 // controller也麻煩更新
-Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1');
-Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index');
+Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')->middleware('isLogged');
+Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index')->middleware('isLogged');
 Route::post('', 'App\Http\Controllers\FeedbackController@store');
