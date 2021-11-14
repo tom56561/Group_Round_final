@@ -132,35 +132,35 @@
       
       <div class="container" style="display: flex;justify-content: center ;align-items: center;">
 
-          <a href="/searchmetag1">   
+          <a href="search/searchmetag1">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn1" name="TagBtn">台中</span></div>
           </a>
           
-          <a href="/searchmetag2">   
+          <a href="search/searchmetag2">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn2" name="TagBtn">台南</span></div>
           </a>
           
-          <a href="/searchmetag3">   
+          <a href="search/searchmetag3">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn3" name="TagBtn">台北</span></div>
           </a>
           
-          <a href="/searchmetag4">   
+          <a href="search/searchmetag4">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn4" name="TagBtn">狼人殺</span></div>
           </a>
 
-          <a href="/searchmetag5">   
+          <a href="search/searchmetag5">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn5" name="TagBtn">新北</span></div>
           </a>
           
-          <a href="/searchmetag6">   
+          <a href="search/searchmetag6">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn6" name="TagBtn">密室脫逃</span></div>
           </a>
 
-          <a href="/searchmetag7">   
+          <a href="search/searchmetag7">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn7" name="TagBtn">運動</span></div>
           </a>
           
-          <a href="/searchmetag8">   
+          <a href="search/searchmetag8">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn8" name="TagBtn">高雄</span></div>
           </a>
 

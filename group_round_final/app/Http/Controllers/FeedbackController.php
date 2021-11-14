@@ -22,7 +22,7 @@ class Home extends Controller
         // return view('會員中心.web.memberCommentF6',compact('usercomment'));
         $usercom = UserComment::all();
         // $city = CityList::all();
-        return view('會員中心.web.memberCommentF6', compact('usercom'));
+        return view('feedback/memberCommentF6', compact('usercom'));
       
         // return view('employees.index', compact('employeeList'));
     }
@@ -34,7 +34,7 @@ class Home extends Controller
         // return view('會員中心.web.memberCommentF6',compact('usercomment'));
         // $usercom = UserComment::all();
         // $city = CityList::all();
-        return view('1012活動說明+搜尋欄.html.actFeed_____E');
+        return view('feedback/html.actFeed_____E');
       
         // return view('employees.index', compact('employeeList'));
     }

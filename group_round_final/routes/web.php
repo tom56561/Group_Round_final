@@ -43,53 +43,54 @@ Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")
 Route::resource('/MemberAlter', 'App\Http\Controllers\MemberAlterController');
 //   ------------
 // serch
+Route::get('/mainpage', function(){
+  return view('mainpageA');
+});  // 首頁在這
+
+Route::get('/mainpageB', function(){
+  return view('mainpageB');
+});  
+
+Route::get('/eventlist', function(){
+  return view('event/eventlist');
+}); 
+
 Route::get('/searchme', function(){
-    return view('searchme');
-  });
+  return view('search/searchme');
+});
 
-  Route::get('/searchmetag1', function(){
-    return view('searchmetag1');
-  });  
+Route::get('/searchmetag1', function(){
+  return view('search/searchmetag1');
+});  
 
-  Route::get('/searchmetag2', function(){
-    return view('searchmetag2');
-  });  
+Route::get('/searchmetag2', function(){
+  return view('search/searchmetag2');
+});  
 
-  Route::get('/searchmetag3', function(){
-    return view('searchmetag3');
-  });  
+Route::get('/searchmetag3', function(){
+  return view('search/searchmetag3');
+});  
 
-  Route::get('/searchmetag4', function(){
-    return view('searchmetag4');
-  });  
+Route::get('/searchmetag4', function(){
+  return view('search/searchmetag4');
+});  
 
-  Route::get('/searchmetag5', function(){
-    return view('searchmetag5');
-  });  
+Route::get('/searchmetag5', function(){
+  return view('search/searchmetag5');
+});  
 
-  Route::get('/searchmetag6', function(){
-    return view('searchmetag6');
-  });  
+Route::get('/searchmetag6', function(){
+  return view('search/searchmetag6');
+});  
 
-  Route::get('/searchmetag7', function(){
-    return view('searchmetag7');
-  });  
+Route::get('/searchmetag7', function(){
+  return view('search/searchmetag7');
+});  
 
-  Route::get('/searchmetag8', function(){
-    return view('searchmetag8');
-  });  
+Route::get('/searchmetag8', function(){
+  return view('search/searchmetag8');
+});  
 
-  Route::get('/mainpage', function(){
-    return view('mainpageA');
-  });  
-
-  Route::get('/mainpageB', function(){
-    return view('mainpageB');
-  });  
-
-  Route::get('/eventlist', function(){
-    return view('eventlist');
-  });  
 //   ------------
 // event
 Route::get('holdevent/{id}', 'App\Http\Controllers\EventController@index');
@@ -104,3 +105,6 @@ Route::any('holdevent/store3', 'App\Http\Controllers\EventController@store3');
 // feedback
 // 建庠的路由要麻煩重設，因為"/"已經給首頁了
 // controller也麻煩更新
+Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1');
+Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index');
+Route::post('', 'App\Http\Controllers\FeedbackController@store');
