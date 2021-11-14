@@ -11,7 +11,7 @@ use App\Models\UserComment;
 use App\Models\UserRecord;
 
 
-class Home extends Controller
+class FeedbackController extends Controller
 {
 
     public function index()

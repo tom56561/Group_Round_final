@@ -8,8 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Icon & Tilttle -->
-    {{-- <link rel="icon" href="../../img/logo.png" type="image/gif" height="16" width="16"> --}}
-    {{-- <title>{{ __('Group Round') }}</title> --}}
+    <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/gif" height="16" width="16">
+    <title>{{ __('Group Round') }}</title>
     
     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -29,13 +29,13 @@
 
 </head>
 
-<body>
+<body style="background-color:  #f6f7f8;">
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded">
             <div class="container-fluid">
                 {{-- home --}}
                 <button type="button" class="btn">
-                    <a class="navbar-brand" href="{{ route('/')}}">
+                    <a class="navbar-brand" href="{{ route('home') }}">
                         <img src="{{ asset('img/logo-text-1.png') }}" type="image/gif" width="120px">
                     </a>
                 </button>
@@ -85,7 +85,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('登出') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

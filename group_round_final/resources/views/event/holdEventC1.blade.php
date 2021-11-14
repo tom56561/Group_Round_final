@@ -75,25 +75,72 @@
 <body>
     <!-- 頁首 -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded ">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded">
             <div class="container-fluid">
-                <button type="button" class="btn"><a class="navbar-brand" href="./header.php">
-                <img src="{{ asset('img/logo-text-1.png')}}" type="image/gif" width="120px"></a></button>
+                {{-- home --}}
+                <button type="button" class="btn">
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <img src="{{ asset('img/logo-text-1.png') }}" type="image/gif" width="120px">
+                    </a>
+                </button>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <!-- 活動建立頁面 -->
                         <li class="nav-item">
-                            <button type="button" class="btn btn-primary btn-sm" ><a href="" class="link-light">辦活動</a></button>
+                            <button type="button" class="btn btn-orange btn-sm"><a href="" {{--活動route--}}
+                                    class="link-light">辦活動</a></button>
                         </li>
                     </ul>
+
                     <form class="d-flex">
                         <!-- 搜尋 -->
                         <input class="form-control me-2 bg-light" type="search" placeholder="搜尋..." aria-label="Search">
-                        <button class="btn btn-secondary btn-sm" type="submit"><img src="{{ asset('img/search.svg')}}" type="image/gif" size="16x16"></button>
+                        <a href="{{--搜尋route--}}"><button class="btn btn-secondary btn-sm" type="submit">
+                            <img src="{{ asset('img/search.svg') }}" type="image/gif" size="16x16"></button>
+                        </a>
+                    </ul>
                     </form>
-                    <!-- 登入註冊 -->
-                    <a class="nav-link link-dark" href=""><img src="{{ asset('img/log-in.svg')}}" type="image/gif" size="16x16"> 登入/註冊</a>
+                    
+                    <!-- Authentication Links -->
+                    <div class="nav-link link-dark">
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link link-dark" href="{{ route('login') }}">
+                                        <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __('登入/註冊') }}
+                                    </a>
+                                </li>
+                            @endif
+
+                            {{-- @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif --}}
+                            
+                            @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </div>
                 </div>
+            </div>
             </div>
         </nav>
     </header>

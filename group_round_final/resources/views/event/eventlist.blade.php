@@ -21,7 +21,7 @@
     </style>
 </head>
 
-<body>
+<body style="background-color:  #f6f7f8;">
     <!-- 頁首 -->
     <!-- 頁首 -->
     <header>
@@ -29,7 +29,7 @@
             <div class="container-fluid">
                 {{-- home --}}
                 <button type="button" class="btn">
-                    <a class="navbar-brand" href="{{ route('/')}}">
+                    <a class="navbar-brand" href="{{ route('home')}}">
                         <img src="{{ asset('img/logo-text-1.png') }}" type="image/gif" width="120px">
                     </a>
                 </button>
@@ -43,14 +43,14 @@
                         </li>
                     </ul>
 
-                    <form class="d-flex">
+                    {{-- <form class="d-flex"> --}}
                         <!-- 搜尋 -->
-                        <input class="form-control me-2 bg-light" type="search" placeholder="搜尋..." aria-label="Search">
-                        <a href="{{--搜尋route--}}"><button class="btn btn-secondary btn-sm" type="submit">
-                            <img src="{{ asset('img/search.svg') }}" type="image/gif" size="16x16"></button>
-                        </a>
-                    </ul>
-                    </form>
+                        {{-- <input class="form-control me-2 bg-light" type="search" placeholder="搜尋..." aria-label="Search"> --}}
+                        {{-- <a href="搜尋route"><button class="btn btn-secondary btn-sm" type="submit"> --}}
+                            {{-- <img src="{{ asset('img/search.svg') }}" type="image/gif" size="16x16"></button> --}}
+                        {{-- </a> --}}
+                    {{-- </ul> --}}
+                    {{-- </form> --}}
                     
                     <!-- Authentication Links -->
                     <div class="nav-link link-dark">

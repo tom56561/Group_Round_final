@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\HomepageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,12 @@ use App\Http\Controllers\UserAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+// homepage
+// Route::get('homepage', [HomepageController::class, 'homepage'])->name('home');
+Route::get('/', function(){
+  return view('homepage');
 })->name('home');
+//   ------------
 
 Route::get('login', [UserAuthController::class, 'login'])->middleware('alreadyLoggedIn'); // alreadyLoggedIn是防止在已登入狀態下看到登入和註冊頁面
 Route::get('register', [UserAuthController::class, 'register'])->middleware('alreadyLoggedIn');
@@ -32,20 +35,20 @@ Route::get('logout', [UserAuthController::class, 'logout']);
 //   ------------
 // member
 Route::get('/member/{id}', "App\Http\Controllers\MemberController@index")->name( 'member.index' );
-Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->middleware('isLogged')->name( 'member.join' );
-Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->middleware('isLogged')->name( 'member.create' );
-Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->middleware('isLogged')->name( 'member.finished' );
-Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->middleware('isLogged')->name( 'member.collect' );
-Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->middleware('isLogged')->name( 'member.comment' );
+Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' )/* ->middleware('isLogged') */;
+Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged');
+Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged');
+Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged');
+Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged');
 
 // 修改會員資料
 Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
 Route::resource('/MemberAlter', 'App\Http\Controllers\MemberAlterController');
 //   ------------
 // serch
-Route::get('/mainpage', function(){
+/* Route::get('/mainpage', function(){
   return view('mainpageA');
-});  // 首頁在這
+});  // 首頁在這 */
 
 Route::get('/mainpageB', function(){
   return view('mainpageB');
@@ -90,21 +93,18 @@ Route::get('/searchmetag7', function(){
 Route::get('/searchmetag8', function(){
   return view('search/searchmetag8');
 });  
-
 //   ------------
-// event
-Route::get('holdevent/{id}', 'App\Http\Controllers\EventController@index')->middleware('isLogged');
-Route::get('holdevent1', 'App\Http\Controllers\EventController@index1')->middleware('isLogged');
-Route::get('holdevent2', 'App\Http\Controllers\EventController@index2')->middleware('isLogged');
-Route::get('holdevent3', 'App\Http\Controllers\EventController@index3')->middleware('isLogged');
-Route::get('holdevent4', 'App\Http\Controllers\EventController@index4')->middleware('isLogged');
+// event 要測試登入狀態時就把後面middleware的註解拿掉
+Route::get('holdevent/{id}', 'App\Http\Controllers\EventController@index')/* ->middleware('isLogged') */;
+Route::get('holdevent1', 'App\Http\Controllers\EventController@index1')/* ->middleware('isLogged') */;
+Route::get('holdevent2', 'App\Http\Controllers\EventController@index2')/* ->middleware('isLogged') */;
+Route::get('holdevent3', 'App\Http\Controllers\EventController@index3')/* ->middleware('isLogged') */;
+Route::get('holdevent4', 'App\Http\Controllers\EventController@index4')/* ->middleware('isLogged') */;
 Route::any('holdevent/store1', 'App\Http\Controllers\EventController@store1');
 Route::any('holdevent/store2', 'App\Http\Controllers\EventController@store2');
 Route::any('holdevent/store3', 'App\Http\Controllers\EventController@store3');
 //   ------------
 // feedback
-// 建庠的路由要麻煩重設，因為"/"已經給首頁了
-// controller也麻煩更新
 Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')->middleware('isLogged');
 Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index')->middleware('isLogged');
-Route::post('', 'App\Http\Controllers\FeedbackController@store');
+// Route::post('', 'App\Http\Controllers\FeedbackController@store');

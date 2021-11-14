@@ -1,41 +1,56 @@
-<?php 
-//獲取搜索關鍵字
-$keyword="台中";
-$select="";
-
-
- ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laravel</title>
+    <link rel="icon" href="{{ url('img/logo.png') }}" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="{{ url('css/style.css') }}">
 
-    <link rel="stylesheet" href="{{ url('/css/bootstrap.css') }}">
-    <link rel="icon" href="../img/logo.png" type="image/gif" sizes="16x16">
-    <title>團團轉 Group Round</title>
-    <link rel="stylesheet" href="{{ url('/css/ActCss/actSearch.css') }}">
-    <link rel="stylesheet" href="{{ url('/css/mainpage.css') }}">
-    <link href="{{ url('/css/customForAll.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript" language="javascript">google.load("jquery", "1.3.2");</script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-
-    </style>
+        
+        /* -----------------快閃訊息------------------------------------ */
+        #notice{
+            background-color: #ff8801c0;
+            text-align: center;
+            line-height:40px;
+            color: white;
+        }
+        /* -----------------快閃訊息------------------------------------ */
+        
+        #welcome{
+            text-align: center;
+            margin-top: 200px;
+            
+        }
+        </style>
 </head>
 
 <body>
-    <!-- 頁首 -->
+    <!-- <div id="welcome">
+        <h1><b>這邊放首頁</b></h1>
+        <span>當使用者刪除會員資料時會跳轉到此頁，並顯示"成功刪除會員資料"的快閃訊息</span>
+    </div>
+    
+    /* -----------------快閃訊息------------------------------------ */
+    {{-- 成功刪除會員資料快閃訊息 --}}
+    @if (session()->has('notice'))
+    <div id="notice">
+        {{ session()->get('notice') }}
+    </div>
+    @endif
+    /* -----------------快閃訊息------------------------------------ */ -->
+
     <!-- 頁首 -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded">
             <div class="container-fluid">
-                {{-- home --}}
+                <!-- home -->
                 <button type="button" class="btn">
-                    <a class="navbar-brand" href="{{ route('/')}}">
+                    <a class="navbar-brand" href="{{ route('home')}}">
                         <img src="{{ asset('img/logo-text-1.png') }}" type="image/gif" width="120px">
                     </a>
                 </button>
@@ -168,8 +183,12 @@ $select="";
 
     <?php
             $conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
-            $queryData = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) INNER JOIN tagList on `event`.eventTag = tagList.tagId WHERE (eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity like '%$keyword%' OR eventTag like '%$keyword%'OR city like '%$keyword%' OR tag like '%$keyword%')AND tag like '%$select%' ORDER BY eventDateTime"); 
-            $data_nums = mysqli_num_rows($queryData);
+            $queryData = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) 
+                                        INNER JOIN tagList on `event`.eventTag = tagList.tagId WHERE (
+                                            eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity 
+                                            like '%$keyword%' OR eventTag like '%$keyword%'OR city like '%$keyword%' OR tag like '%$keyword%')
+                                        AND tag like '%$select%' ORDER BY eventDateTime"); 
+            $data_nums = mysqli_num_rows( use($queryData) ); //這裡加了use() by盈瑄
             $per = 3;
             $pages = ceil($data_nums/$per);
             if (!isset($_GET["page"])){ //假如$_GET["page"]未設置
@@ -178,7 +197,11 @@ $select="";
                 $page = intval($_GET["page"]); //確認頁數只能夠是數值資料
             }
             $start = ($page-1)*$per; //每一頁開始的資料序號       
-            $query = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) INNER JOIN tagList on `event`.eventTag = tagList.tagId WHERE (eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity like '%$keyword%' OR eventTag like '%$keyword%' OR city like '%$keyword%' OR tag like '%$keyword%')AND tag like '%$select%' ORDER BY eventDateTime LIMIT ".$start. ',' .$per);
+            $query = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) 
+                                        INNER JOIN tagList on `event`.eventTag = tagList.tagId WHERE (
+                                            eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity 
+                                            like '%$keyword%' OR eventTag like '%$keyword%' OR city like '%$keyword%' OR tag like '%$keyword%')
+                                        AND tag like '%$select%' ORDER BY eventDateTime LIMIT ".$start. ',' .$per);
 
             while ($result = mysqli_fetch_array($query)){
                 $DateTime = $result['eventDateTime'];
@@ -319,25 +342,6 @@ $select="";
             </div>
         </div>
     </footer>
-
-
-</body>
-
-
-
-<script>
-   
-
     
-
-
-
-</script>
-
-
-
-
-
-
-
-</html >
+</body>
+</html>

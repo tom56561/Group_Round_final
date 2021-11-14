@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Citylist;
+use App\Models\User_1;
+use App\Models\TagList;
+use App\Models\UserInterestTag;
+use App\Models\Event;
 
 class UserAuthController extends Controller
 {
@@ -64,7 +69,7 @@ class UserAuthController extends Controller
         if($query){
             return back()->with('success', '註冊成功！');
         }else{
-            return back()->with('fail', '有錯誤的資料，請再確認一次');
+            return back()->with('fail', '資料有誤，請再確認一次');
         }
     }
 
@@ -119,17 +124,6 @@ class UserAuthController extends Controller
         }
         return view('member/profile', $data);
     }
-
-    // 會員
-    /* function member(){
-        if(session()->has('LoggedUser')){
-            $user = User::where('id', '=', session('LoggedUser'))->first();
-            $date = [
-                'LoggedUserInfo'=>$user
-            ];
-        }
-        return view('member/profile', $data); // 跟profile有關的都換成會員
-    } */
 
     function logout(){
         if(session()->has('LoggedUser')){
