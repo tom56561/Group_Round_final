@@ -11284,7 +11284,7 @@ textarea.form-control-lg {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <!-- 活動建立頁面 -->
                         <li class="nav-item">
-                            <button type="button" class="btn btn-orange btn-sm"><a href="" {{--活動route--}}
+                            <button type="button" class="btn btn-orange btn-sm"><a href="{{ route('eventcreate') }}" {{--活動route--}}
                                     class="link-light">辦活動</a></button>
                         </li>
                     </ul>

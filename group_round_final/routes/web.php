@@ -96,7 +96,7 @@ Route::get('/searchmetag8', function(){
 //   ------------
 // event 要測試登入狀態時就把後面middleware的註解拿掉
 Route::get('holdevent/{id}', 'App\Http\Controllers\EventController@index')/* ->middleware('isLogged') */;
-Route::get('holdevent1', 'App\Http\Controllers\EventController@index1')/* ->middleware('isLogged') */;
+Route::get('holdevent1', 'App\Http\Controllers\EventController@index1')->name('eventcreate')/* ->middleware('isLogged') */;
 Route::get('holdevent2', 'App\Http\Controllers\EventController@index2')/* ->middleware('isLogged') */;
 Route::get('holdevent3', 'App\Http\Controllers\EventController@index3')/* ->middleware('isLogged') */;
 Route::get('holdevent4', 'App\Http\Controllers\EventController@index4')/* ->middleware('isLogged') */;
