@@ -1,4 +1,4 @@
-@extends('layout.alter')
+@extends('layouts.alter')
 
 @section('title')
     收藏的活動

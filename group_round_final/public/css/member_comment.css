@@ -5,19 +5,17 @@
 
 }
 
-#rightDiv img {
+
+#toppicImg, #commentImg, #commentStar img{
     margin: 10px 0px 10px 0px;
 }
 
-#submitBtn {
-    margin-left: 30px;
+#commentSubmitBtn {
+    margin-left: 85%;
     margin-bottom: 10px;
-    width: 500px;
-   
+    /* width: 100px;    */
 }
-#commentTopic{
-    margin-bottom: 20px;
-}
+
 #commentContent{
     border-bottom: 1px gray solid;
 }

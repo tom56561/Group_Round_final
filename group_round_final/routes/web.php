@@ -36,13 +36,13 @@ Route::get('logout', [UserAuthController::class, 'logout']);
 // member
 Route::get('/member/{id}', "App\Http\Controllers\MemberController@index")->name( 'member.index' );
 Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' )/* ->middleware('isLogged') */;
-Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged');
-Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged');
-Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged');
-Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged');
+Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )/* ->middleware('isLogged') */;
+Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )/* ->middleware('isLogged') */;
+Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )/* ->middleware('isLogged') */;
+Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )/* ->middleware('isLogged') */;
 
 // 修改會員資料
-Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
+Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )/* ->middleware('isLogged') */;
 Route::resource('/MemberAlter', 'App\Http\Controllers\MemberAlterController');
 //   ------------
 // serch
@@ -56,7 +56,7 @@ Route::get('/mainpageB', function(){
 
 Route::get('/eventlist', function(){
   return view('event/eventlist');
-}); 
+})->name('eventlist'); // 活動列表
 
 Route::get('/searchme', function(){
   return view('search/searchme');
@@ -105,6 +105,6 @@ Route::any('holdevent/store2', 'App\Http\Controllers\EventController@store2');
 Route::any('holdevent/store3', 'App\Http\Controllers\EventController@store3');
 //   ------------
 // feedback
-Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')->middleware('isLogged');
-Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index')->middleware('isLogged');
+Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')/* ->middleware('isLogged') */;
+Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index')/* ->middleware('isLogged') */;
 // Route::post('', 'App\Http\Controllers\FeedbackController@store');

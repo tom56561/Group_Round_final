@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Citylist extends Model
 {
     use HasFactory;
-    protected $table = "cityList";
+    protected $table = "citylist";
     protected $primaryKey = 'cityId';
     public $timestamps = false;
 

@@ -192,7 +192,7 @@ $select="運動";
 
     <?php
             $conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
-            $queryData = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) INNER JOIN tagList on `event`.eventTag = tagList.tagId WHERE (eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity like '%$keyword%' OR eventTag like '%$keyword%'OR city like '%$keyword%' OR tag like '%$keyword%')AND tag like '%$select%' ORDER BY eventDateTime"); 
+            $queryData = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) INNER JOIN taglist on `event`.eventTag = taglist.tagId WHERE (eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity like '%$keyword%' OR eventTag like '%$keyword%'OR city like '%$keyword%' OR tag like '%$keyword%')AND tag like '%$select%' ORDER BY eventDateTime"); 
             $data_nums = mysqli_num_rows($queryData);
             $per = 9;
             $pages = ceil($data_nums/$per);
@@ -202,7 +202,7 @@ $select="運動";
                 $page = intval($_GET["page"]); //確認頁數只能夠是數值資料
             }
             $start = ($page-1)*$per; //每一頁開始的資料序號       
-            $query = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) INNER JOIN tagList on `event`.eventTag = tagList.tagId WHERE (eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity like '%$keyword%' OR eventTag like '%$keyword%' OR city like '%$keyword%' OR tag like '%$keyword%')AND tag like '%$select%' ORDER BY eventDateTime LIMIT ".$start. ',' .$per);
+            $query = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) INNER JOIN taglist on `event`.eventTag = taglist.tagId WHERE (eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity like '%$keyword%' OR eventTag like '%$keyword%' OR city like '%$keyword%' OR tag like '%$keyword%')AND tag like '%$select%' ORDER BY eventDateTime LIMIT ".$start. ',' .$per);
 
             while ($result = mysqli_fetch_array($query)){
                 $DateTime = $result['eventDateTime'];

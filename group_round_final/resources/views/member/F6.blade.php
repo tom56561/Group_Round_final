@@ -1,4 +1,4 @@
-@extends('layout.alter')
+@extends('layouts.alter')
 
 @section('title')
     團員的回饋

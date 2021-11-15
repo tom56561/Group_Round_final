@@ -14,7 +14,7 @@ class User extends Model
 
     function citylist()
     {
-        return $this->belongsTo(CityList::class, 'cityId');
+        return $this->belongsTo(Citylist::class, 'cityId');
     }
     function usercomment()
     {

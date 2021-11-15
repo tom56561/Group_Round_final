@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TagList extends Model
 {
     use HasFactory;
-    protected $table = "tagList";
+    protected $table = "taglist";
     protected $primaryKey = 'tagId';
     public $timestamps = false;
 

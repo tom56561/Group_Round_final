@@ -35,7 +35,7 @@ class UserAuthController extends Controller
             'userNickname'=>'required|min:1|max:30|unique:user',
             'userName'=>'required|min:1|max:30',
             'userCity'=>'required',
-            'userPhone'=>'required',
+            // 'userPhone'=>'required',
             'userGender'=>'required',
             'userBirthday'=>'required',
             'useruserImg'=>'',
@@ -43,33 +43,35 @@ class UserAuthController extends Controller
         ]);
 
         // 驗證通過後送入表單
-        /* $user = new User;
+        $user = new User;
         $user->userEmail = $request->userEmail;
         $user->userPassword = Hash::make($request->userPassword);
+        $user->userNickName = $request->userNickName;
         $user->userName = $request->userName;
         $user->userCity = $request->userCity;
         // $user->userPhone = $request->userPhone;
         $user->userGender = $request->userGender;
         $user->userBirthday = $request->userBirthday;
         $user->userImg = $request->userImg;
-        $query = $user->save(); */
+        $query = $user->save();
 
         // 用QUERY做到和上面同樣效果
-        $query = DB::table('user')->insert([
+        /* $query = DB::table('user')->insert([
             'userEmail'=>$request->userEmail,
             'userPassword'=>Hash::make($request->userPassword),
+            'userNickName'=>$requeest->userNickName,
             'userName'=>$request->userName,
             'userCity'=>$request->userCity,
             // 'userPhone'=>$request->userPhone,
             'userGender'=>$request->userGender,
             'userBirthday'=>$request->userBirthday,
             'userImg'=>$request->userImg,
-        ]);
+        ]); */
 
         if($query){
             return back()->with('success', '註冊成功！');
         }else{
-            return back()->with('fail', '資料有誤，請再確認一次');
+            return back()->with('fail', '發生錯誤，請再提交一次');
         }
     }
 

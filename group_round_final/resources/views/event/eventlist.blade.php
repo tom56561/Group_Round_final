@@ -173,7 +173,8 @@
 
     <?php
             $conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
-            $queryData = mysqli_query($conn,"SELECT *,city FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) INNER JOIN tagList on `event`.eventTag = tagList.tagId"); 
+            $queryData = mysqli_query($conn,"SELECT *,city FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) 
+                                        INNER JOIN taglist on `event`.eventTag = taglist.tagId"); 
             $data_nums = mysqli_num_rows($queryData);
             $per = 9;
             $pages = ceil($data_nums/$per);
@@ -183,7 +184,8 @@
                 $page = intval($_GET["page"]); //確認頁數只能夠是數值資料
             }
             $start = ($page-1)*$per; //每一頁開始的資料序號       
-            $query = mysqli_query($conn,"SELECT *,city FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) INNER JOIN tagList on `event`.eventTag = tagList.tagId LIMIT " .$start. ',' .$per); 
+            $query = mysqli_query($conn,"SELECT *,city FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) 
+                                        INNER JOIN taglist on `event`.eventTag = taglist.tagId LIMIT " .$start. ',' .$per); 
             
                  
             while ($result = mysqli_fetch_array($query)){

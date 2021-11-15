@@ -1,4 +1,4 @@
-@extends('layout.alter')
+@extends('layouts.alter')
 
 @section('title')
     發起的活動

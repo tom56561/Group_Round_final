@@ -1,15 +1,25 @@
+<?php
+$keyword="台中";
+$select="";
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
-    <link rel="icon" href="{{ url('img/logo.png') }}" type="image/gif" sizes="16x16">
-    <link rel="stylesheet" type="text/css" href="{{ url('css/style.css') }}">
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('/css/bootstrap.css') }}">
+    <link rel="icon" href="../img/logo.png" type="image/gif" sizes="16x16">
+    <title>團團轉 Group Round</title>
+    <link rel="stylesheet" href="{{ url('/css/ActCss/actSearch.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/mainpage.css') }}">
+    <link href="{{ url('/css/customForAll.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" language="javascript">google.load("jquery", "1.3.2");</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <style>
         
         /* -----------------快閃訊息------------------------------------ */
@@ -122,14 +132,14 @@
 
     <div class="MainPageButtonAll">
         <div class="MainPageButton">
-            <a href="#">
+            <a href="{{ route('eventcreate') }}">
                 <span>我要開團</span>
                 <span>我要開團</span>
             </a>
         </div>
 
         <div class="MainPageButton2">
-            <a href="#">
+            <a href="{{ route('eventlist')}}">
                 <span>我要加入</span>
                 <span>我要加入</span>
             </a>
@@ -183,12 +193,12 @@
 
     <?php
             $conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
-            $queryData = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) 
-                                        INNER JOIN tagList on `event`.eventTag = tagList.tagId WHERE (
+            $queryData = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) 
+                                        INNER JOIN taglist on `event`.eventTag = taglist.tagId WHERE (
                                             eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity 
                                             like '%$keyword%' OR eventTag like '%$keyword%'OR city like '%$keyword%' OR tag like '%$keyword%')
                                         AND tag like '%$select%' ORDER BY eventDateTime"); 
-            $data_nums = mysqli_num_rows( use($queryData) ); //這裡加了use() by盈瑄
+            $data_nums = mysqli_num_rows( $queryData ); //這裡加了use() by盈瑄
             $per = 3;
             $pages = ceil($data_nums/$per);
             if (!isset($_GET["page"])){ //假如$_GET["page"]未設置
@@ -197,8 +207,8 @@
                 $page = intval($_GET["page"]); //確認頁數只能夠是數值資料
             }
             $start = ($page-1)*$per; //每一頁開始的資料序號       
-            $query = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) 
-                                        INNER JOIN tagList on `event`.eventTag = tagList.tagId WHERE (
+            $query = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) 
+                                        INNER JOIN taglist on `event`.eventTag = taglist.tagId WHERE (
                                             eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity 
                                             like '%$keyword%' OR eventTag like '%$keyword%' OR city like '%$keyword%' OR tag like '%$keyword%')
                                         AND tag like '%$select%' ORDER BY eventDateTime LIMIT ".$start. ',' .$per);
@@ -234,7 +244,7 @@
 
     <?php
             $conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
-            $queryData = mysqli_query($conn,"SELECT *,city FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) INNER JOIN tagList on `event`.eventTag = tagList.tagId"); 
+            $queryData = mysqli_query($conn,"SELECT *,city FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) INNER JOIN taglist on `event`.eventTag = taglist.tagId"); 
             $data_nums = mysqli_num_rows($queryData);
             $per = 3;
             $pages = ceil($data_nums/$per);
@@ -244,7 +254,7 @@
                 $page = intval($_GET["page"]); //確認頁數只能夠是數值資料
             }
             $start = ($page-1)*$per; //每一頁開始的資料序號       
-            $query = mysqli_query($conn,"SELECT *,city FROM (`event` INNER JOIN cityList on `event`.eventCity = cityList.cityId) INNER JOIN tagList on `event`.eventTag = tagList.tagId LIMIT " .$start. ',' .$per); 
+            $query = mysqli_query($conn,"SELECT *,city FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) INNER JOIN taglist on `event`.eventTag = taglist.tagId LIMIT " .$start. ',' .$per); 
             
                  
             while ($result = mysqli_fetch_array($query)){
@@ -266,7 +276,7 @@
 
 
               ?>
-              <a class="btn btn-outline-secondary" id="MoreButton" href="/eventlist" role="button">看更多...</a>
+              <a class="btn btn-outline-secondary" id="MoreButton" href="{{ route('eventlist')}}" role="button">看更多...</a>
                <br><br><br> <br><br><br>
 
                         
