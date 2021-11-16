@@ -55,7 +55,6 @@
                         <a href="{{ route('eventlist')}}"><button class="btn btn-secondary btn-sm" type="submit">
                             <img src="{{ asset('img/search.svg') }}" type="image/gif" size="16x16"></button>
                         </a>
-                    </ul>
                     </form>
                     
                     <!-- Authentication Links -->
