@@ -112,7 +112,7 @@
                                 </section>
                             </div>
                             <div class="form-check d-flex flex-row-reverse mb-5">
-                                <label class="form-check-label" for="exampleCheck1">
+                                <label class="form-check-label" for="noticeCheck">
                                     <input type="hidden" class="form-check-input" id="noticeCheck" name="noticeCheck" value="0"> {{--預設未勾選為0--}}
                                     <input type="checkbox" class="form-check-input" id="noticeCheck" name="noticeCheck" value="1">
                                     我已閱讀以上注意事項

@@ -295,7 +295,7 @@
         <!-- Button -->
         <div class="d-flex justify-content-end mb-4">
             <!-- <input class="px-3 btn btn-secondary" id="btn" type="button" onclick="" value="上一步" /> -->
-            <input href="{{ route('holdevent2')}}" class="px-3 btn btn-main next" id="btn" type="submit" onclick="getSelectedId()" value="下一步" />
+            <input class="px-3 btn btn-main next" id="btn" type="submit" onclick="getSelectedId()" value="下一步" />
         </div>
     </div>
 

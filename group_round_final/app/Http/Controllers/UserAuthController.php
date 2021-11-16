@@ -22,7 +22,7 @@ class UserAuthController extends Controller
     function register(){
         return view('auth/register');
     }
-    
+
     // 城市列表
     public function index()
     {
@@ -136,8 +136,8 @@ class UserAuthController extends Controller
                 'LoggedUserInfo'=>$user
             ];
         }
-        // return view('member/profile', $data);
-        return redirect()->intended('member/index', $data);
+        return view('member/profile', $data);
+        // return redirect()->intended('member/index', $data);
     }
 
     function logout(){
@@ -147,4 +147,8 @@ class UserAuthController extends Controller
         }
     }
 
+    // 重設密碼
+    /* function reser_password(){
+        return view('auth/reser_password');
+    } */
 }

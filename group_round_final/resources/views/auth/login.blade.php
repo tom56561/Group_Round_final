@@ -29,8 +29,9 @@
                                 <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                             </div>
                             <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="rememberAccount">記住帳號</label> {{--還沒做--}}
+                                <input type="checkbox" class="form-check-input" id="rememberAccount" name="rememberAccount">
+                                <input type="hidden" class="form-check-input" id="noticeCheck" name="noticeCheck" value="0">
+                                <label class="form-check-label" for="rememberAccount" value="1">記住帳號</label> {{--還沒做--}}
                             </div>
                             <div class="mb-5">
                                 <a href="{{----}}" id="resetPassword" class="form-text">忘記密碼</a> {{--還沒做--}}

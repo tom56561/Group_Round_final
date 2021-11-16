@@ -28,18 +28,18 @@ Route::post('create', [UserAuthController::class, 'create'])->name('auth.create'
 Route::post('check', [UserAuthController::class, 'check'])->name('auth.check');
 
 // profile相關換成小馬的member
-Route::get('profile', [UserAuthController::class, 'profile'])->middleware('isLogged'); // isLogged在Kernel裡接到 Middlewares/AuthCheck 未登入會拒絕訪問
+Route::get('profile', [UserAuthController::class, 'profile'])->name('profile')->middleware('isLogged'); // isLogged在Kernel裡接到 Middlewares/AuthCheck 未登入會拒絕訪問
 //         換成其他名稱會出現 Bad Method Call 先用profile當會員中心
 
 Route::get('logout', [UserAuthController::class, 'logout'])->name('logout');
 //   ------------
 // member
 Route::get('/member/{id}', "App\Http\Controllers\MemberController@index")->name( 'member.index' );
-Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' )->middleware('isLogged');
-Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged');
-Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged');
-Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged');
-Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged');
+Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged')->middleware('alreadyLoggedIn');
 
 // 修改會員資料
 Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
