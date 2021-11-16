@@ -131,7 +131,7 @@ class UserAuthController extends Controller
                 'LoggedUserInfo'=>$user
             ];
         }
-        return view('member/profile', $data);
+        return view('member/index', $data);
     }
 
     function logout(){
