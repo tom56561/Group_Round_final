@@ -22,7 +22,8 @@ class UserAuthController extends Controller
     function register(){
         return view('auth/register');
     }
-
+    
+    // 城市列表
     public function index()
     {
         $cityList = Article::all();
@@ -32,51 +33,58 @@ class UserAuthController extends Controller
     // 註冊>新建會員資料
     function create(Request $request){
         // return $request->input(); // 測試
+        // dd($request->all());
 
         // 驗證請求
         $request->validate([
             'userEmail'=>'required|email|unique:user', // unique:tablename
             'userPassword'=>'required|min:6|max:12',
-            'userNickname'=>'required|min:1|max:30|unique:user',
+            'userNickName'=>'required|min:1|max:30|unique:user',
             'userName'=>'required|min:1|max:30',
-            'userCity'=>'required',
+            'cityId'=>'required',
             // 'userPhone'=>'required',
             'userGender'=>'required',
             'userBirthday'=>'required',
-            'useruserImg'=>'',
-            'exampleCheck1'=>'required'
+            'userImg'=>'mimes:jpg,png,jpeg|max:3072',
+            'noticeCheck'=>'required|in:1'
         ]);
-
+        
         // 驗證通過後送入表單
-        // $user = new User;
-        $user = new User_1;
-        $cityList = Citylist::all();
-        $user->userEmail = $request->userEmail;
-        $user->userPassword = Hash::make($request->userPassword);
-        $user->userNickName = $request->userNickName;
-        $user->userName = $request->userName;
-        $user->userCity = $request->userCity;
-        // $user->userPhone = $request->userPhone;
-        $user->userGender = $request->userGender;
-        $user->userBirthday = $request->userBirthday;
-        $user->userImg = $request->userImg;
-        $query = $user->save();
 
+        // $user = new User;
+        // $user = new User_1;
+        // $cityList = Citylist::all();
+        // $user->userEmail = $request->userEmail;
+        // $user->userPassword = Hash::make($request->userPassword);
+        // $user->userNickName = $request->userNickName; // 表單大小寫不同
+        // $user->userName = $request->userName;
+        // $user->cityId = $request->cityId;
+        // // $user->userPhone = $request->userPhone;
+        // $user->userGender = $request->userGender;
+        // $user->userBirthday = $request->userBirthday;
+        // if($request->userImg){
+        //     $user->userImg = $request->userImg;
+        // }
+        // $query = $user->save();
+
+        
         // 用QUERY做到和上面同樣效果
-        /* $query = DB::table('user')->insert([
+        
+        $cityList = Citylist::all();
+        $query = DB::table('user')->insert([
             'userEmail'=>$request->userEmail,
             'userPassword'=>Hash::make($request->userPassword),
-            'userNickName'=>$requeest->userNickName,
+            'userNickName'=>$request->userNickName,
             'userName'=>$request->userName,
-            'userCity'=>$request->userCity,
+            'cityId'=>$request->cityId,
             // 'userPhone'=>$request->userPhone,
             'userGender'=>$request->userGender,
             'userBirthday'=>$request->userBirthday,
             'userImg'=>$request->userImg,
-        ]); */
+        ]); 
 
         if($query){
-            return back()->with('success', '註冊成功！');
+            return redirect('login')->with('success', '註冊成功！');
         }else{
             return back()->with('fail', '發生錯誤，請再提交一次');
         }
@@ -131,7 +139,7 @@ class UserAuthController extends Controller
                 'LoggedUserInfo'=>$user
             ];
         }
-        return view('member/index', $data);
+        return view('member/profile', $data);
     }
 
     function logout(){

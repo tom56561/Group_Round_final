@@ -35,7 +35,7 @@
             <div class="container-fluid">
                 {{-- home --}}
                 <button type="button" class="btn">
-                    <a class="navbar-brand" href="{{ route('home') }}">
+                    <a class="navbar-brand" href="#">
                         <img src="{{ asset('img/logo-text-1.png') }}" type="image/gif" width="120px">
                     </a>
                 </button>
@@ -44,7 +44,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <!-- 活動建立頁面 -->
                         <li class="nav-item">
-                            <button type="button" class="btn btn-orange btn-sm"><a href="{{ route('eventcreate') }}" {{--活動route--}}
+                            <button type="button" class="btn btn-orange btn-sm"><a href="#" {{--活動route--}}
                                     class="link-light">辦活動</a></button>
                         </li>
                     </ul>

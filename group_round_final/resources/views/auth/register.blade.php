@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <form action="{{ route('auth.create')}}" method="POST" class="container mb-5"> {{--與路由動作相同--}}
+                <form action="{{ route('auth.create')}}" method="post" class="container mb-5" enctype="multipart/form-data"> {{--與路由動作相同--}}
                     @csrf {{-- token --}}
                     <div class="results">
                         @if(Session::get('success'))
@@ -40,8 +40,8 @@
                                 <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                             </label>
                             <label class="input-group mb-3">
-                                <span for="userNickname" class="input-group-text">使用者名稱</span>
-                                <input type="text" class="form-control bg-light" id="userNickname" name="userNickName">
+                                <span for="userNickName" class="input-group-text">使用者名稱</span>
+                                <input type="text" class="form-control bg-light" id="userNickName" name="userNickName" value="{{ old('name')}}">
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                             </label>
                             <label class="input-group mb-3">
@@ -50,8 +50,8 @@
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                             </label>
                             <label class="input-group mb-3">
-                                <span for="userCity" class="input-group-text">居住地區</span>
-                                <select class="form-select" aria-label="userCity" name="userCity">
+                                <span for="cityId" class="input-group-text">居住地區</span>
+                                <select class="form-select" aria-label="cityId" name="cityId">
                                     <option selected>選擇地區...</option>
                                     <option value="1">基隆市</option>
                                     <option value="2">台北市</option>
@@ -100,7 +100,7 @@
                             </label>
                             <div class="mb-3">
                                 <label for="userImg" class="form-label">頭像上傳</label>
-                                <input class="form-control" type="file" id="userImg" name="userImg">
+                                <input class="form-control" type="file" id="userImg" name="userImg" accept="image/png, image/jpeg">
                             </div>
                             <div class="mb-3">
                                 <label for="notice" class="form-label">注意事項</label>
@@ -113,7 +113,8 @@
                             </div>
                             <div class="form-check d-flex flex-row-reverse mb-5">
                                 <label class="form-check-label" for="exampleCheck1">
-                                    <input type="checkbox" class="form-check-input" id="noticeCheck" name="noticeCheck">
+                                    <input type="hidden" class="form-check-input" id="noticeCheck" name="noticeCheck" value="0"> {{--預設未勾選為0--}}
+                                    <input type="checkbox" class="form-check-input" id="noticeCheck" name="noticeCheck" value="1">
                                     我已閱讀以上注意事項
                                 </label>
                             </div>
