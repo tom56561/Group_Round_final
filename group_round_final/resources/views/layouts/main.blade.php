@@ -197,7 +197,7 @@
                     <form class="d-flex">
                         <!-- 搜尋 -->
                         <input class="form-control me-2 bg-light" type="search" placeholder="搜尋..." aria-label="Search">
-                        <a href="{{--搜尋route--}}"><button class="btn btn-secondary btn-sm" type="submit">
+                        <a href="{{ route('eventcreate') }}"><button class="btn btn-secondary btn-sm" type="submit">
                             <img src="{{ asset('img/search.svg') }}" type="image/gif" size="16x16"></button>
                         </a>
                     </ul>

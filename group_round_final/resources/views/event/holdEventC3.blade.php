@@ -68,7 +68,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('登出') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -136,26 +136,71 @@
         <form method="post" action="/holdevent/store3" class="form-horizontal">
             @csrf
             <div class="row py-4">
-                <div class="col-4"></div>
-                <div class="col-4">
+                {{-- Left --}}
+                <div class="col-6">
                     <div>
-                        <label for="title" class="form-label pb-2 h4">活動時間：</label>
-                        <input class="form-control bg-main" type="text" name="time" id="time">
+                        <label for="time" class="form-label pb-2 h4 d-block">活動時間：</label>
+                        <input class="eventTime" type="datetime-local" id="time"
+                            name="time" value="2021-11-16T19:30"
+                            min="2021-11-16T00:00" max="2022-11-16T00:00">
                     </div>
                     <div class="mt-4 pt-3">
+                        <label for="title" class="form-label pb-2 h4">舉辦城市：</label>
+                        <select class="form-select" name="city" aria-label="userCity">
+                            <option selected>選擇地區...</option>
+                            <option value="1">基隆市</option>
+                            <option value="2">台北市</option>
+                            <option value="3">新北市</option>
+                            <option value="4">桃園市</option>
+                            <option value="5">新竹縣</option>
+                            <option value="6">新竹市</option>
+                            <option value="7">苗栗縣</option>
+                            <option value="8">台中市</option>
+                            <option value="9">彰化縣</option>
+                            <option value="10">南投縣</option>
+                            <option value="11">雲林縣</option>
+                            <option value="12">嘉義縣</option>
+                            <option value="13">嘉義市</option>
+                            <option value="14">台南市</option>
+                            <option value="15">高雄市</option>
+                            <option value="16">屏東縣</option>
+                            <option value="17">宜蘭縣</option>
+                            <option value="18">花蓮縣</option>
+                            <option value="19">台東縣</option>
+                            <option value="20">澎湖縣</option>
+                            <option value="21">金門縣</option>
+                            <option value="22">連江縣</option>
+                            <option value="23">其他</option>
+                        </select>
+                    </div>
+                    <div class="mt-4 pt-3">
+                        <label for="title" class="form-label pb-2 h4 d-block">性別限制：</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" value="m" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">限男生</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" value="f" id="flexRadioDefault2" >
+                            <label class="form-check-label" for="flexRadioDefault2">限女生</label>
+                        </div> 
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" value="n" id="flexRadioDefault3" >
+                            <label class="form-check-label" for="flexRadioDefault3">不限制</label>
+                        </div>                    
+                    </div>
+
+                </div>
+                {{-- Right --}}
+                <div class="col-6">
+                    <div>
                         <label for="title" class="form-label pb-2 h4">活動地點：</label>
                         <input class="form-control bg-main" type="text" name="location" id="location">
                     </div>
                     <div class="mt-4 pt-3">
-                        <label for="title" class="form-label pb-2 h4">參加人數：</label>
+                        <label for="title" class="form-label pb-2 h4">人數限制：</label>
                         <input class="form-control bg-main" type="text" name="people" id="people">
                     </div>
-                    <div class="mt-4 pt-3">
-                        <label for="title" class="form-label pb-2 h4">性別限制：</label>
-                        <input class="form-control bg-main" type="text" name="gender" id="gender">
-                    </div>
                 </div>
-                <div class="col-4"></div>
             </div>
     
             <!-- Button -->
@@ -168,7 +213,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-center text-lg-start">
+    <footer class="bg-dark text-center text-lg-start fixed-bottom">
         <div class="container ">
             <!-- Copyright -->
             <div class="text-center p-4 text-light">

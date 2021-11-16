@@ -103,6 +103,14 @@ Route::get('holdevent4', 'App\Http\Controllers\EventController@index4')/* ->midd
 Route::any('holdevent/store1', 'App\Http\Controllers\EventController@store1');
 Route::any('holdevent/store2', 'App\Http\Controllers\EventController@store2');
 Route::any('holdevent/store3', 'App\Http\Controllers\EventController@store3');
+Route::post('event/join/{id}', 'App\Http\Controllers\EventController@join');
+Route::post('event/cancel/{id}', 'App\Http\Controllers\EventController@cancel');
+Route::post('event/like/{id}', 'App\Http\Controllers\EventController@like');
+
+Route::get('event/edit1/{id}', 'App\Http\Controllers\EventController@edit1');
+Route::get('event/edit2/{id}', 'App\Http\Controllers\EventController@edit2');
+Route::get('event/edit3/{id}', 'App\Http\Controllers\EventController@edit3');
+Route::get('event/edit4/{id}', 'App\Http\Controllers\EventController@edit4');
 //   ------------
 // feedback
 Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')/* ->middleware('isLogged') */;

@@ -25,7 +25,7 @@
         
     })
 
-    function getSelectedId(){
+    function getSelectedId(){   //取得所選圖片id
         var a =[];
         i=0;
         $(".selected").each(function(){
@@ -34,7 +34,7 @@
         });
 
  
-        $.ajax({
+        $.ajax({          //ajax傳送到後端
             type: "POST",
             url: "/holdevent/store1",
             data: {'array':a,'_token':'{{csrf_token()}}'},
@@ -129,7 +129,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('登出') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

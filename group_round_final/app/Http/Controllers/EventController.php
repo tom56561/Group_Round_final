@@ -3,30 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\userRecord;
+use App\Models\user;
+use App\Models\tagList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
     function index($id) {
-        $db = DB::table('event')->where('eventId','=',$id);
-        $eventTitle = $db -> value('eventTitle');
-        $eventContent = $db -> value('eventContent');
-        $eventImg = $db -> value('eventImg');
-        $DateTime = $db -> value('eventDateTime');
+        $db = Event::find($id);
+        // $db = DB::table('event')->where('eventId','=',$id);
+        $eventTitle = $db -> eventTitle;
+        $eventContent = $db -> eventContent;
+        $eventImg = $db -> eventImg;
+        $DateTime = $db -> eventDateTime;
         $eventDateTime =  date('Y年m月d日',strtotime($DateTime));
         $eventDateTime1 =  date('H時i分',strtotime($DateTime));
         $eventDateTime2 =  date('m月d日 H:i',strtotime($DateTime));
         $weekarray=array("日","一","二","三","四","五","六");
         $weekday = $weekarray[date("w",strtotime($DateTime))];
-        $eventCity = $db -> value('eventCity');
-        $eventLocation = $db -> value('eventLocation');
-        $peopleNumber = $db -> value('peopleNumber');
-        $userGender = $db -> value('userGender');
-        $eventTag = $db -> value('eventTag');
-        $eventTag2 = $db -> value('eventTag2');
-        $userId = $db -> value('userId');
-        
+        $eventCity = $db -> eventCity;
+        $eventLocation = $db -> eventLocation;
+        $peopleNumber = $db -> peopleNumber;
+        $userGender = $db -> userGender;
+        $eventTag = $db -> tagList1 -> tag; //外鍵
+        $eventTag2 = $db -> tagList2 -> tag; //外鍵
+        $userName = $db -> user -> userName; //外鍵
+        $userImg = $db -> user -> userImg; //外鍵
+        $userJoin = $db -> userRecord->where('type','join'); //外鍵一對多
+        $userLike = $db -> userRecord->where('type','like'); //外鍵一對多
+
+
         $viewModel = compact(
             "eventTitle", 
             "eventContent", 
@@ -34,14 +42,18 @@ class EventController extends Controller
             "eventDateTime",
             "eventDateTime1",
             "eventDateTime2",
+            "weekday",
             "eventCity", 
             "eventLocation", 
             "peopleNumber", 
             "userGender",
             "eventTag", 
             "eventTag2", 
-            "userId", 
-            "weekday",
+            "userName", 
+            "userImg", 
+            "userJoin",
+            "id",
+            "userLike",
         );
         // dd($viewModel);
         return view("event.eventPageC", $viewModel);
@@ -60,46 +72,101 @@ class EventController extends Controller
         return view('event.holdEventC4');
     }
 
+    function edit1($id){
+        return "good";
+    }
+
     function store1(Request $request)
     {
-        $db = DB::table('event');
-        $result = $db -> insert([
-            "eventTag" => $request->array[0],
-            "eventTag2" => $request->array[1],
-        ]);
+        // $db = DB::table('event');
+        // $result = $db -> insert([
+        //     "eventTag" => $request->array[0],
+        //     "eventTag2" => $request->array[1],
+        // ]);
         
-        // $event = new Event();
-        // $event->eventTag = 2;
-        // $event->eventTag2 = 3;
-        // $result = $event->save();
-        // // $event -> create($request -> all());
+        $event = new Event();
+        $event->eventTag = $request->array[0];
+        $event->eventTag2 = $request->array[1];
+        $result = $event->save();
+        // $event -> create($request -> all()); 
         return "holdevent2";
-        // // $test = $request->array[0];
     }
 
     function store2(Request $request)
     {
-        $db = DB::table('event');
-        $last = $db -> orderByDesc('eventId') -> first() ->eventId;
-        $result = $db -> where('eventId','=',$last) -> update([
-            "eventTitle" => $request->title,
-            "eventContent" => $request->content,
-        ]);
+        $imgName = $request->img->getClientOriginalName();;
+        $request->img->storeAs('eventImg', $imgName ,'public');
+        $last = DB::table('event') -> orderByDesc('eventId') -> first() ->eventId;
+        // $result = $db -> where('eventId','=',$last) -> update([
+        //     "eventTitle" => $request->title,
+        //     "eventContent" => $request->content,
+        // ]);
+        $event=Event::find($last);
+        $event->eventImg = $imgName;
+        $event->eventTitle = $request->title;
+        $event->eventContent = $request->content;
+        $event->save();
+
         return redirect("/holdevent3");
 
     }
     function store3(Request $request)
     {
-        $db = DB::table('event');
-        $last = $db -> orderByDesc('eventId') -> first() ->eventId;
-        $result = $db -> where('eventId','=',$last) -> update([
-            "eventDateTime" => $request->time,
-            "eventLocation" => $request->location,
-            "peopleNumber" => $request->people,
-            "userGender" => $request->gender,
-        ]);
+        $last = DB::table('event') -> orderByDesc('eventId') -> first() ->eventId;
+        // $result = $db -> where('eventId','=',$last) -> update([
+        //     "eventDateTime" => $request->time,
+        //     "eventLocation" => $request->location,
+        //     "peopleNumber" => $request->people,
+        //     "userGender" => $request->gender,
+        // ]);
+        $event=Event::find($last);
+        $event->eventDateTime = $request->time;
+        $event->eventLocation = $request->location;
+        $event->peopleNumber = $request->people;
+        $event->eventCity = $request->city;
+        $event->userGender = $request->gender;
+        $event->save();
 
         return redirect("/holdevent4");
-
+        
     }
+
+    function join(Request $request, $id)
+    {
+        $userRecord = new UserRecord();
+        $userRecord -> userId = 4;  //測試
+        $userRecord -> eventId = $id;
+        $userRecord -> type = "join";
+        $userRecord->save();
+        return redirect("event/$id");
+    }
+
+    function cancel(Request $request, $id)
+    {
+        $userId=4;
+        $matchThese = ['eventId' => $id, 'userId' => $userId, 'type' =>'join'];
+        UserRecord::where($matchThese)->delete();
+        return redirect("event/$id");
+    }
+
+    function like(Request $request, $id)
+    {
+        $result = 'error';
+        $userId=4;
+        $matchThese = ['eventId' => $id, 'userId' => $userId, 'type' =>'like'];
+        $like = UserRecord::where($matchThese)->first();
+        if(isset($like)){
+            UserRecord::destroy($like->id);
+            $result = 'delete';
+        }else{
+            $userRecord = new UserRecord();
+            $userRecord -> userId = $userId;  //測試
+            $userRecord -> eventId = $id;
+            $userRecord -> type = "like";
+            $userRecord->save();
+            $result = 'success';
+        }
+        return $result;
+    }
+
 }

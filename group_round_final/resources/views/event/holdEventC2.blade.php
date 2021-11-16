@@ -68,7 +68,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('登出') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -104,7 +104,7 @@
         </div>
 
         <!-- Information -->
-        <form method="post" action="/holdevent/store2" class="form-horizontal">
+        <form method="post" action="/holdevent/store2" enctype="multipart/form-data" class="form-horizontal">
             @csrf
         <div class="row py-4">
                 <!-- Left -->
@@ -123,12 +123,14 @@
                 <!-- Right -->
                 <div class="col-6">
                     <div>
-                        <label for="formFile" class="form-label h4">上傳圖片：</label>
-                        <input class="form-control" type="file" name="formFile" id="formFile">
+                        <label for="file" class="form-label h4">上傳圖片：</label>
+                        <input class="form-control" onchange="readURL(this)"
+                        type="file" name="img" id="img" 
+                        targetID="demoImg" accept="image/gif, image/jpeg, image/png"/>
                     </div>
                     <div class="img-frame">
-                        <img class="img-content mt-4" 
-                        src="https://secure.meetupstatic.com/photos/event/d/b/b/e/clean_493676254.jpeg" alt="">
+                        <img class="img-content mt-4" id="demoImg"
+                        src="https://via.placeholder.com/300x400/FFFFFF?text=預覽圖片" alt="">
                     </div>
                 </div>
             </div>
@@ -150,5 +152,19 @@
             </div>
         </div>
     </footer>
+    <script>
+
+    function readURL(input){   //圖片預覽
+     if(input.files && input.files[0]){
+        var imageTagID = input.getAttribute("targetID");
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var img = document.getElementById(imageTagID);
+            img.setAttribute("src", e.target.result)
+        }
+        reader.readAsDataURL(input.files[0]);
+     }
+    }
+    </script>
 
 </html>

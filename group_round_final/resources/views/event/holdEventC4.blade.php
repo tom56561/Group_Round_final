@@ -69,7 +69,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('登出') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -97,7 +97,10 @@
 
         <!-- Button -->
         <div class="d-flex justify-content-center mb-2 py-4">
-            <input class="px-3 btn btn-main" id="btn" type="button" onclick="" value="確定" />
+            <form method="get" action="event/{{$last = DB::table('event') -> orderByDesc('eventId') -> first() ->eventId;}}" class="form-horizontal">
+                @csrf
+                <input class="px-3 btn btn-main" id="btn" type="submit" onclick="" value="確定" />
+            </form>
         </div>
     </div>
 

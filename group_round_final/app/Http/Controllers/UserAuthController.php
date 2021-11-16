@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
 use App\Models\Citylist;
 use App\Models\User_1;
 use App\Models\TagList;
@@ -22,6 +21,12 @@ class UserAuthController extends Controller
     // 註冊頁面
     function register(){
         return view('auth/register');
+    }
+
+    public function index()
+    {
+        $cityList = Article::all();
+        return view('auth/register')->with('cityList',$cityList);
     }
 
     // 註冊>新建會員資料
@@ -43,7 +48,9 @@ class UserAuthController extends Controller
         ]);
 
         // 驗證通過後送入表單
-        $user = new User;
+        // $user = new User;
+        $user = new User_1;
+        $cityList = Citylist::all();
         $user->userEmail = $request->userEmail;
         $user->userPassword = Hash::make($request->userPassword);
         $user->userNickName = $request->userNickName;

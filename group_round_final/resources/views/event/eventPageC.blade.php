@@ -20,7 +20,7 @@
             <div class="container-fluid">
                 {{-- home --}}
                 <button type="button" class="btn">
-                    <a class="navbar-brand" href="{{ route('/')}}">
+                    <a class="navbar-brand" href="{{ route('home') }}">
                         <img src="{{ asset('img/logo-text-1.png') }}" type="image/gif" width="120px">
                     </a>
                 </button>
@@ -70,7 +70,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('登出') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -117,11 +117,11 @@
             <div class="d-flex flex-row col-4 align-items-center ps-5">
                 <div>
                     <img class="rounded-circle bg-cover img-host"
-                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg" alt="">
+                        src="{{ asset('storage/upload/'.$userImg) }}" alt="">
                 </div>
                 <div class="ps-3">
                     <span class="d-block">舉辦人</span>
-                    <span class="fw-bold">林啟德{{$userId}}</span>
+                    <span class="fw-bold">{{$userName}}</span>
                 </div>
             </div>
         </div>
@@ -141,7 +141,8 @@
                     <!-- Photo -->
                     <div class="pb-5">
                         <img class="img-content"
-                            src="https://secure.meetupstatic.com/photos/event/d/b/b/e/clean_493676254.jpeg"{{$eventImg}} alt="">
+                        src="{{ asset('storage/eventImg/'.$eventImg) }}" alt="">
+                        {{-- src="{{ url('storage/app/public/eventImg/'.$eventImg)}}" alt=""> --}}
                     </div>
                     <!-- Content -->
                     <div>
@@ -155,29 +156,12 @@
                     <div class="pt-3">
                         <span class="h4">參加者</span>
                         <div>
-                            <ul class="row">
+                            <ul class="row">                           
+                                @foreach ($userJoin as $person)
                                 <li class="col-2 me-2 pt-3"> <img class="rounded-circle bg-cover img-attendees"
-                                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
-                                        alt=""></li>
-                                <li class="col-2 me-2 pt-3"> <img class="rounded-circle bg-cover img-attendees"
-                                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
-                                        alt=""></li>
-                                <li class="col-2 me-2 pt-3"> <img class="rounded-circle bg-cover img-attendees"
-                                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
-                                        alt=""></li>
-                                <li class="col-2 me-2 pt-3"> <img class="rounded-circle bg-cover img-attendees"
-                                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
-                                        alt=""></li>
-                                <li class="col-2 me-2 pt-3"> <img class="rounded-circle bg-cover img-attendees"
-                                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
-                                        alt=""></li>
-                                <li class="col-2 me-2 pt-3"> <img class="rounded-circle bg-cover img-attendees"
-                                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
-                                        alt=""></li>
-                                <li class="col-2 me-2 pt-3"> <img class="rounded-circle bg-cover img-attendees"
-                                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
-                                        alt=""></li>
-
+                                    src="{{ asset('storage/upload/'.$person->user->userImg) }}"
+                                    alt=""></li>
+                                @endforeach
                             </ul>
 
                         </div>
@@ -270,9 +254,12 @@
                             </ul>
                         </div>
                         <div class="mt-4 ps-4">
+                            {{-- <span class="fs-6 badge rounded-pill btn-main me-2">社交</span>
+                            <span class="fs-6 badge rounded-pill btn-main me-2">桌遊</span> --}}
+
                             <span class="fs-6 badge rounded-pill btn-main me-2">{{$eventTag}}</span>
                             <span class="fs-6 badge rounded-pill btn-main me-2">{{$eventTag2}}</span>
-                            <span class="fs-6 badge rounded-pill btn-main me-2">{{$eventTag}}</span>
+
 
                         </div>
                     </div>
@@ -297,8 +284,19 @@
                         </path>
                     </svg> -->
                     <span><img src="/resources/img/share.svg" alt=""></span>
-                    <span class="like align-middle px-3">&#9733;</span>
-                    <input class="px-3 btn btn-orange" id="btn" type="button" onclick="" value="參加活動" />
+                    <span id='like' class="like align-middle px-3">&#9733;</span>
+                    <form method="post" action="/event/join/{{$id}}" enctype="multipart/form-data" class="d-inline">
+                        @csrf
+                    <input class="px-3 btn btn-orange " id="btn" type="submit" onclick="" value="參加活動" />
+                    </form>
+                    <form method="post" action="/event/cancel/{{$id}}" enctype="multipart/form-data" class="d-inline">
+                        @csrf
+                    <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="取消活動" />
+                    </form>
+                    <form method="get" action="/event/edit1/{{$id}}" enctype="multipart/form-data" class="d-inline">
+                        @csrf
+                    <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="編輯活動" />
+                    </form>
                 </div>
             </div>
 
@@ -378,11 +376,20 @@
                 </div>
             </div>
         </footer>
-
     <script>
-        $(function () {
-            $(".like").click(function () {
-                $(this).toggleClass('cs');
+
+
+        $(function () {        
+            $("#like").click(function () {  //收藏按鈕
+            $.ajax({          //ajax傳送到後端
+            type: "POST",
+            url: "/event/like/{{$id}}",
+            data: {'_token':'{{csrf_token()}}'},
+            success: function(test){
+             console.log(test);
+             $("#like").toggleClass('cs');
+             }
+             });
             })
         })
 

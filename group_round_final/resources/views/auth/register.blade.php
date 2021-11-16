@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <form action="{{ route('auth.create')}}" method="post" class="container mb-5"> {{--與路由動作相同--}}
+                <form action="{{ route('auth.create')}}" method="POST" class="container mb-5"> {{--與路由動作相同--}}
                     @csrf {{-- token --}}
                     <div class="results">
                         @if(Session::get('success'))
@@ -41,7 +41,7 @@
                             </label>
                             <label class="input-group mb-3">
                                 <span for="userNickname" class="input-group-text">使用者名稱</span>
-                                <input type="text" class="form-control bg-light" id="userNickname" name="userNickname">
+                                <input type="text" class="form-control bg-light" id="userNickname" name="userNickName">
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
                             </label>
                             <label class="input-group mb-3">
@@ -51,7 +51,7 @@
                             </label>
                             <label class="input-group mb-3">
                                 <span for="userCity" class="input-group-text">居住地區</span>
-                                <select class="form-select" aria-label="userCity" name="userCity">
+                                {{-- <select class="form-select" aria-label="userCity" name="userCity">
                                     <option selected>選擇地區...</option>
                                     <option value="1">基隆市</option>
                                     <option value="2">台北市</option>
@@ -76,7 +76,10 @@
                                     <option value="21">金門縣</option>
                                     <option value="22">連江縣</option>
                                     <option value="23">其他</option>
-                                </select>
+                                </select> --}}
+                                @foreach ($cityList as $city)
+                                <option class="form-select" aria-label="userCity" name="userCity" value="{{ $city->cityId }}" {{ ($user->cityId == $city->cityId) ? 'selected' : '' }}>{{ $city->city }}</option>
+                                @endforeach
                             </label>
                             {{-- <label class="input-group mb-3">
                                 <span for="userPhone" class="input-group-text">連絡電話</span>
