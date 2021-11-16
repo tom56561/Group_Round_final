@@ -42,7 +42,6 @@ class UserAuthController extends Controller
             'userNickName'=>'required|min:1|max:30|unique:user',
             'userName'=>'required|min:1|max:30',
             'cityId'=>'required',
-            // 'userPhone'=>'required',
             'userGender'=>'required',
             'userBirthday'=>'required',
             'userImg'=>'mimes:jpg,png,jpeg|max:3072',
@@ -52,20 +51,19 @@ class UserAuthController extends Controller
         // 驗證通過後送入表單
 
         // $user = new User;
-        // $user = new User_1;
-        // $cityList = Citylist::all();
-        // $user->userEmail = $request->userEmail;
-        // $user->userPassword = Hash::make($request->userPassword);
-        // $user->userNickName = $request->userNickName; // 表單大小寫不同
-        // $user->userName = $request->userName;
-        // $user->cityId = $request->cityId;
-        // // $user->userPhone = $request->userPhone;
-        // $user->userGender = $request->userGender;
-        // $user->userBirthday = $request->userBirthday;
-        // if($request->userImg){
-        //     $user->userImg = $request->userImg;
-        // }
-        // $query = $user->save();
+        /* $user = new User_1;
+        $cityList = Citylist::all();
+        $user->userEmail = $request->userEmail;
+        $user->userPassword = Hash::make($request->userPassword);
+        $user->userNickName = $request->userNickName; // 表單大小寫不同
+        $user->userName = $request->userName;
+        $user->cityId = $request->cityId;
+        $user->userGender = $request->userGender;
+        $user->userBirthday = $request->userBirthday;
+        if($request->userImg){
+            $user->userImg = $request->userImg;
+        }
+        $query = $user->save(); */
 
         
         // 用QUERY做到和上面同樣效果
@@ -77,7 +75,6 @@ class UserAuthController extends Controller
             'userNickName'=>$request->userNickName,
             'userName'=>$request->userName,
             'cityId'=>$request->cityId,
-            // 'userPhone'=>$request->userPhone,
             'userGender'=>$request->userGender,
             'userBirthday'=>$request->userBirthday,
             'userImg'=>$request->userImg,
@@ -139,7 +136,8 @@ class UserAuthController extends Controller
                 'LoggedUserInfo'=>$user
             ];
         }
-        return view('member/profile', $data);
+        // return view('member/profile', $data);
+        return redirect()->intended('member/index', $data);
     }
 
     function logout(){

@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="{{ asset('style/css/customForAll.css')}}">
 </head>
 <body>
-    <h1>{{ $LoggedUserInfo->name }}</h1>
+    <h1>{{ $LoggedUserInfo->userNickName }}</h1>
     <br>
-    <h1>{{ $LoggedUserInfo->email }}</h1>
+    <h1>{{ $LoggedUserInfo->userEmail }}</h1>
     <br>
     <a href="logout">logout</a>
     <br>
