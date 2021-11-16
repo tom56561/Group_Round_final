@@ -198,7 +198,7 @@ $select="";
                                             eventTitle like '%$keyword%' OR eventLocation like '%$keyword%' OR eventContent like '%$keyword%' OR eventCity 
                                             like '%$keyword%' OR eventTag like '%$keyword%'OR city like '%$keyword%' OR tag like '%$keyword%')
                                         AND tag like '%$select%' ORDER BY eventDateTime"); 
-            $data_nums = mysqli_num_rows( $queryData ); //這裡加了use() by盈瑄
+            $data_nums = mysqli_num_rows( $queryData );
             $per = 3;
             $pages = ceil($data_nums/$per);
             if (!isset($_GET["page"])){ //假如$_GET["page"]未設置

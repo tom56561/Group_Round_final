@@ -51,7 +51,7 @@
                             </label>
                             <label class="input-group mb-3">
                                 <span for="userCity" class="input-group-text">居住地區</span>
-                                {{-- <select class="form-select" aria-label="userCity" name="userCity">
+                                <select class="form-select" aria-label="userCity" name="userCity">
                                     <option selected>選擇地區...</option>
                                     <option value="1">基隆市</option>
                                     <option value="2">台北市</option>
@@ -76,10 +76,10 @@
                                     <option value="21">金門縣</option>
                                     <option value="22">連江縣</option>
                                     <option value="23">其他</option>
-                                </select> --}}
-                                @foreach ($cityList as $city)
+                                </select>
+                                {{-- @foreach ($cityList as $city)
                                 <option class="form-select" aria-label="userCity" name="userCity" value="{{ $city->cityId }}" {{ ($user->cityId == $city->cityId) ? 'selected' : '' }}>{{ $city->city }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </label>
                             {{-- <label class="input-group mb-3">
                                 <span for="userPhone" class="input-group-text">連絡電話</span>
