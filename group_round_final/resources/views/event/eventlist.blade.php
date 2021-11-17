@@ -300,14 +300,6 @@
                                 data-mdb-ripple-color="dark"
                                 ><img src="{{ asset('img/icons8-facebook-24.png') }}" type="img/gif" alt="facebook" size="24x24">
                             </a>
-                            <!-- Twitter -->
-                            <a
-                                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                                href="#!"
-                                role="button"
-                                data-mdb-ripple-color="dark"
-                                ><img src="{{ asset('img/icons8-twitter-26.png') }}" alt="twitter" size="24x24">
-                            </a>
                             <!-- Instagram -->
                             <a
                                 class="btn btn-link btn-floating btn-lg text-dark m-1"
