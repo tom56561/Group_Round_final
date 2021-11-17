@@ -109,7 +109,7 @@
             <div class="d-flex flex-row col-4 align-items-center ps-5">
                 <div>
                     <img class="rounded-circle bg-cover img-host"
-                        src="{{ asset('storage/upload/'.$userImg) }}" alt="">
+                        src="{{ asset('upload/'.$userImg) }}" alt="">
                 </div>
                 <div class="ps-3">
                     <span class="d-block">舉辦人</span>
@@ -133,8 +133,7 @@
                     <!-- Photo -->
                     <div class="pb-5">
                         <img class="img-content"
-                        src="{{ asset('storage/eventImg/'.$eventImg) }}" alt="">
-                        {{-- src="{{ url('storage/app/public/eventImg/'.$eventImg)}}" alt=""> --}}
+                        src="{{ asset('eventImg/'.$eventImg) }}" alt="">
                     </div>
                     <!-- Content -->
                     <div>
