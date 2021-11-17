@@ -83,8 +83,8 @@
                                 </a></li>
                             </ul>
                         </div>
+                        {{-- @endauth --}}
                     </div>
-                    {{-- @endauth --}}
                 </div>
             </div>
             </div>
