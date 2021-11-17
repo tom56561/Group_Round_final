@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\DB;
 class EventController extends Controller
 {
     function index($id) {
+        if(session()->has('LoggedUser')){
+            $user = User::where('userId', session('LoggedUser'))->first()->userId;
+        }
         $db = Event::find($id);
         // $db = DB::table('event')->where('eventId','=',$id);
         $eventTitle = $db -> eventTitle;
@@ -27,6 +30,7 @@ class EventController extends Controller
         $eventLocation = $db -> eventLocation;
         $peopleNumber = $db -> peopleNumber;
         $userGender = $db -> userGender;
+        $holduser = $db -> userId;
         $eventTag = $db -> tagList1 -> tag; //外鍵
         $eventTag2 = $db -> tagList2 -> tag; //外鍵
         $userName = $db -> user -> userName; //外鍵
@@ -54,6 +58,8 @@ class EventController extends Controller
             "userJoin",
             "id",
             "userLike",
+            "holduser",
+            "user",
         );
         // dd($viewModel);
         return view("event.eventPageC", $viewModel);
@@ -83,8 +89,11 @@ class EventController extends Controller
         //     "eventTag" => $request->array[0],
         //     "eventTag2" => $request->array[1],
         // ]);
-        
+        if(session()->has('LoggedUser')){
+            $user = User::where('userId', session('LoggedUser'))->first()->userId;
+        }
         $event = new Event();
+        $event->userId = $user;
         $event->eventTag = $request->array[0];
         $event->eventTag2 = $request->array[1];
         $result = $event->save();
@@ -133,8 +142,11 @@ class EventController extends Controller
 
     function join(Request $request, $id)
     {
+        if(session()->has('LoggedUser')){
+            $user = User::where('userId', session('LoggedUser'))->first()->userId;
+        }
         $userRecord = new UserRecord();
-        $userRecord -> userId = 4;  //測試
+        $userRecord -> userId = $user; 
         $userRecord -> eventId = $id;
         $userRecord -> type = "join";
         $userRecord->save();
@@ -143,24 +155,28 @@ class EventController extends Controller
 
     function cancel(Request $request, $id)
     {
-        $userId=4;
-        $matchThese = ['eventId' => $id, 'userId' => $userId, 'type' =>'join'];
+        if(session()->has('LoggedUser')){
+            $user = User::where('userId', session('LoggedUser'))->first()->userId;
+        }
+        $matchThese = ['eventId' => $id, 'userId' => $user, 'type' =>'join'];
         UserRecord::where($matchThese)->delete();
         return redirect("event/$id");
     }
 
     function like(Request $request, $id)
     {
+        if(session()->has('LoggedUser')){
+            $user = User::where('userId', session('LoggedUser'))->first()->userId;
+        }
         $result = 'error';
-        $userId=4;
-        $matchThese = ['eventId' => $id, 'userId' => $userId, 'type' =>'like'];
+        $matchThese = ['eventId' => $id, 'userId' => $user, 'type' =>'like'];
         $like = UserRecord::where($matchThese)->first();
         if(isset($like)){
             UserRecord::destroy($like->id);
             $result = 'delete';
         }else{
             $userRecord = new UserRecord();
-            $userRecord -> userId = $userId;  //測試
+            $userRecord -> userId = $user;  //測試
             $userRecord -> eventId = $id;
             $userRecord -> type = "like";
             $userRecord->save();
