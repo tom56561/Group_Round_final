@@ -94,8 +94,8 @@ class EventController extends Controller
 
     function store2(Request $request)
     {
-        $imgName = $request->img->getClientOriginalName();;
-        $request->img->storeAs('eventImg', $imgName ,'public');
+        $imgName = $request->img->getClientOriginalName();
+        $request->img->move(public_path('eventImg'),  $imgName);
         $last = DB::table('event') -> orderByDesc('eventId') -> first() ->eventId;
         // $result = $db -> where('eventId','=',$last) -> update([
         //     "eventTitle" => $request->title,
