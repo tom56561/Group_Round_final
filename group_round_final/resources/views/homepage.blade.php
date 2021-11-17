@@ -31,28 +31,20 @@ $select="";
         }
         /* -----------------快閃訊息------------------------------------ */
         
-        #welcome{
-            text-align: center;
-            margin-top: 200px;
-            
-        }
         </style>
 </head>
 
 <body>
-    <!-- <div id="welcome">
-        <h1><b>這邊放首頁</b></h1>
-        <span>當使用者刪除會員資料時會跳轉到此頁，並顯示"成功刪除會員資料"的快閃訊息</span>
-    </div>
     
-    /* -----------------快閃訊息------------------------------------ */
+    
+    {{-- -----------------快閃訊息------------------------------------  --}}
     {{-- 成功刪除會員資料快閃訊息 --}}
     @if (session()->has('notice'))
     <div id="notice">
         {{ session()->get('notice') }}
     </div>
     @endif
-    /* -----------------快閃訊息------------------------------------ */ -->
+     {{-- -----------------快閃訊息------------------------------------ * --}}
 
     <!-- 頁首 -->
     <header>
@@ -119,7 +111,7 @@ $select="";
     </header>
     <body style="background-color:  #f6f7f8;">
     <div class="MainPageBanner">
-        <img src="../img/mainpagepic1.jpg" id="MainPagePicture">
+        <img src="../img/mainpagepic1.png" id="MainPagePicture" style="width: 100%;">
     </div>
 
     <div class="MainPageButtonAll">
@@ -139,50 +131,41 @@ $select="";
     </div>
 
     <div class="container">
-    <form action="/searchme" method="get">  
-    {{ csrf_field() }}
-        <div class="ActPageSearch container">
-            <div class="ActPageSearchSelect"><img src="../img/selecticon.png" style="width: 1vw;height: 2vh;"></div>
-            <select class="form-select" aria-label="" name="select"
-                style="background-color: rgb(240, 240, 240) ;font-weight: 900;text-align: center;width: 10vw;">
-                <option selected value="">活動類型...</option>
-                <option value="藝術與文化">藝術與文化</option>
-                <option value="生態與環境">生態與環境</option>
-                <option value="學習">學習</option>
-                <option value="親子活動">親子活動</option>
-                <option value="寵物">寵物</option>
-                <option value="旅遊與戶外">旅遊與戶外</option>
-                <option value="運動">運動</option>
-                <option value="宗教與心靈">宗教與心靈</option>
-                <option value="科學與教育">科學與教育</option>
-                <option value="社交活動">社交活動</option>
-                <option value="桌遊">桌遊</option>
-                <option value="密室脫逃">密室脫逃</option>
-                <option value="美食與品味">美食與品味</option>
-                <option value="線上">線上</option>
-                <option value="烹飪">烹飪</option>
-                <option value="攝影">攝影</option>
-            </select>
-            <input type="text"  name="keyword" style="width: 47.5vw;" placeholder='請輸入關鍵字 如:台中、狼人殺、密室脫逃等等'  class="form-control"></input>&nbsp
-            <input type="submit" class="btn btn-orange btn-sm" id="searchBtn" name="searchBtn" value="搜尋"></input>
-        </form>    
-        </div>
-            <br>
-            
-
+        <form action="/searchme" method="get">  
+        {{ csrf_field() }}
+            <div class="ActPageSearch container">
+                <div class="ActPageSearchSelect"><img src="../img/selecticon.png" style="width: 1vw;height: 2vh;"></div>
+                <select class="form-select" aria-label="" name="select"
+                    style="background-color: rgb(240, 240, 240) ;font-weight: 900;text-align: center;width: 10vw;">
+                    <option selected value="">活動類型...</option>
+                    <option value="藝術與文化">藝術與文化</option>
+                    <option value="生態與環境">生態與環境</option>
+                    <option value="學習">學習</option>
+                    <option value="親子活動">親子活動</option>
+                    <option value="寵物">寵物</option>
+                    <option value="旅遊與戶外">旅遊與戶外</option>
+                    <option value="運動">運動</option>
+                    <option value="宗教與心靈">宗教與心靈</option>
+                    <option value="科學與教育">科學與教育</option>
+                    <option value="社交活動">社交活動</option>
+                    <option value="桌遊">桌遊</option>
+                    <option value="密室脫逃">密室脫逃</option>
+                    <option value="美食與品味">美食與品味</option>
+                    <option value="線上">線上</option>
+                    <option value="烹飪">烹飪</option>
+                    <option value="攝影">攝影</option>
+                </select>
+                <input type="text"  name="keyword" style="width: 47.5vw;" placeholder='請輸入關鍵字 如:台中、狼人殺、密室脫逃等等'  class="form-control">
+                &nbsp;
+                <input type="submit" class="btn btn-orange btn-sm" id="searchBtn" name="searchBtn" value="搜尋">
+            </div>
+        </form> 
     </div>
-
-    </div>
-      
-      
-    
-  </div>
-    <br> <br>
 
     <div class="MainPageText">
         <h1>台中附近的推薦活動</h1>
     </div>
-
+    
     <?php
             $conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
             $queryData = mysqli_query($conn,"SELECT * FROM (`event` INNER JOIN citylist on `event`.eventCity = citylist.cityId) 
