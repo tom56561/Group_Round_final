@@ -81,10 +81,6 @@
                                 <option class="form-select" aria-label="userCity" name="userCity" value="{{ $city->cityId }}" {{ ($user->cityId == $city->cityId) ? 'selected' : '' }}>{{ $city->city }}</option>
                                 @endforeach --}}
                             </label>
-                            {{-- <label class="input-group mb-3">
-                                <span for="userPhone" class="input-group-text">連絡電話</span>
-                                <input type="" class="form-control bg-light" id="userPhone" name="userPhone">
-                            </label> --}}
                             <label class="input-group mb-3">
                                 <span for="userGender" class="input-group-text">性別</span>
                                 <select class="form-select" aria-label="userGender" name="userGender">
@@ -98,10 +94,10 @@
                                 <span for="userBirthday" class="input-group-text">生日</span>
                                 <input type="date" class="form-control bg-light" id="userBirthday" name="userBirthday">
                             </label>
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="userImg" class="form-label">頭像上傳</label>
                                 <input class="form-control" type="file" id="userImg" name="userImg" accept="image/png, image/jpeg">
-                            </div>
+                            </div> --}}
                             <div class="mb-3">
                                 <label for="notice" class="form-label">注意事項</label>
                                 <section type="text" class="form-control bg-light overflow-auto" id="notice">

@@ -44,7 +44,7 @@ class UserAuthController extends Controller
             'cityId'=>'required',
             'userGender'=>'required',
             'userBirthday'=>'required',
-            'userImg'=>'mimes:jpg,png,jpeg|max:3072',
+            // 'userImg'=>'mimes:jpg,png,jpeg|max:3072',
             'noticeCheck'=>'required|in:1'
         ]);
         
@@ -77,7 +77,7 @@ class UserAuthController extends Controller
             'cityId'=>$request->cityId,
             'userGender'=>$request->userGender,
             'userBirthday'=>$request->userBirthday,
-            'userImg'=>$request->userImg,
+            // 'userImg'=>$request->userImg,
         ]); 
 
         if($query){

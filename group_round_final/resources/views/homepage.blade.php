@@ -160,6 +160,7 @@ $select="";
                 <input type="submit" class="btn btn-orange btn-sm" id="searchBtn" name="searchBtn" value="搜尋">
             </div>
         </form> 
+        <br><br><br><br><br>
     </div>
 
     <div class="MainPageText">
