@@ -9,11 +9,7 @@
 
     <!-- Icon & Tilttle -->
     <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/gif" height="16" width="16">
-    <title>{{ __('Group Round') }}</title>
-    
-    <!-- Fonts -->
-    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
+    <title>{{ __('Group Round 團團轉') }}</title>
     
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('style/css/bootstrap.css')}}">

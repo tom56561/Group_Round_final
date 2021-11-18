@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ url('/css/ActCss/actSearch.css') }}">
     <link rel="stylesheet" href="{{ url('/css/mainpage.css') }}">
     <link href="{{ url('/css/customForAll.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ URL::asset('js/bootstrap.bundle.js' )}}"></script>
+    <script src="{{ URL::asset('js/jquery-3.6.0.min.js' )}}"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" language="javascript">google.load("jquery", "1.3.2");</script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
