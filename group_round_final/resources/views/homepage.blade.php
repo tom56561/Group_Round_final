@@ -111,9 +111,9 @@ $select="";
                                 {{ __('會員中心') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.index', $user->userId) }} --}}">我的頁面</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.collect', $user->iserId) }} --}}">收藏的活動</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.Alter', $user->userId) }} --}}">修改資料</a></li>
+                                <li><a class="dropdown-item" href="{{-- {{ route('member.index', $LoggedUserInfo->userId) }} --}}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{-- {{ route('member.collect', $LoggedUserInfo->userId) }} --}}">收藏的活動</a></li>
+                                <li><a class="dropdown-item" href="{{-- {{ route('member.Alter', $LoggedUserInfo->userId) }} --}}">修改資料</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">
                                     {{ __('登出') }}

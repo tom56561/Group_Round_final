@@ -87,11 +87,6 @@ class UserAuthController extends Controller
         }
     }
 
-    // 註冊後跳轉至登入頁面
-    /* function success(){
-        return view('');
-    } */
-
     // 登入表單格式檢查
     function check(Request $request){
         // return $request->input(); 測試
@@ -119,11 +114,6 @@ class UserAuthController extends Controller
         }
     }
 
-    // 登入後跳轉
-    /* function previous(){
-        return view('auth/login'); // 還沒設定
-    } */
-
     function profile(){
         // return view('member/profile');
 
@@ -137,6 +127,10 @@ class UserAuthController extends Controller
             ];
         }
         return view('member/profile', $data);
+        return view('layouts/app', $data);
+        return view('layouts/alter', $data);
+        return view('layouts/main', $data);
+        return view('homepage', $data);
         // return redirect()->intended('member/index', $data);
         // return back()->with('success','登入成功');
     }
