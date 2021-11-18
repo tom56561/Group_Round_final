@@ -49,15 +49,14 @@
                     
                     <!-- Authentication Links -->
                     <div class="nav-link link-dark">
-                        @guest
+                        @if(!session()->has('LoggedUser'))
                             <span class="nav-item">
                                 <a class="nav-link link-dark" href="{{ route('login') }}">
                                     <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __(' 登入/註冊') }}
                                 </a>
                             </span>
-                        @endguest
+                        @else
                         
-                        {{-- @auth --}}
                         <div class="nav-item dropdown">
                             <a type="button" id="navbarDropdown" class="nav-link link-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="{{ asset('img/user.svg') }}" type="image/gif" size="16x16">
@@ -73,8 +72,9 @@
                                 </a></li>
                             </ul>
                         </div>
+                        @endif
+                        
                     </div>
-                    {{-- @endauth --}}
                 </div>
             </div>
             </div>

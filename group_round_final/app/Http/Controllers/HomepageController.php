@@ -11,20 +11,29 @@ class HomepageController extends Controller
     }
 
     function user_information(){
-        // return view('member/profile');
 
         // 會員中心名稱和郵件(抓取資料)
         if(session()->has('LoggedUser')){
             // $user = User::where('id', '=', session('LoggedUser'))->first();
-            // 用QUERY做到和上面同樣效果
             $user = DB::table('user')->where('userId', session('LoggedUser'))->first();
             $data = [
                 'LoggedUserInfo'=>$user
             ];
         }
-        return $data;
-        // return redirect()->intended('member/index', $data);
-        // return back()->with('success','登入成功');
+        return view('layouts/app', $data);
+        return view('layouts/alter', $data);
+        return view('layouts/main', $data);
+        return view('homepage', $data);
+        return view('searchme', $data);
+        return view('searchmetag1', $data);
+        return view('searchmetag2', $data);
+        return view('searchmetag3', $data);
+        return view('searchmetag4', $data);
+        return view('searchmetag5', $data);
+        return view('searchmetag6', $data);
+        return view('searchmetag7', $data);
+        return view('searchmetag8', $data);
+
     }
 
 }

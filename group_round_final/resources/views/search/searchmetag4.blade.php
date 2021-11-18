@@ -54,25 +54,16 @@ $select="";
                         </li>
                     </ul>
 
-                    {{-- <form class="d-flex">
-                        <!-- 搜尋 -->
-                        <input class="form-control me-2 bg-light" type="search" placeholder="搜尋..." aria-label="Search">
-                        <a href="{{ route('eventlist')}}"><button class="btn btn-secondary btn-sm" type="submit">
-                            <img src="{{ asset('img/search.svg') }}" type="image/gif" size="16x16"></button>
-                        </a>
-                    </form> --}}
-                    
                     <!-- Authentication Links -->
                     <div class="nav-link link-dark">
-                        @guest
+                        @if(!session()->has('LoggedUser'))
                             <span class="nav-item">
                                 <a class="nav-link link-dark" href="{{ route('login') }}">
                                     <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __(' 登入/註冊') }}
                                 </a>
                             </span>
-                        @endguest
+                        @else
                         
-                        {{-- @auth --}}
                         <div class="nav-item dropdown">
                             <a type="button" id="navbarDropdown" class="nav-link link-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="{{ asset('img/user.svg') }}" type="image/gif" size="16x16">
@@ -88,8 +79,9 @@ $select="";
                                 </a></li>
                             </ul>
                         </div>
+                        @endif
+                        
                     </div>
-                    {{-- @endauth --}}
                 </div>
             </div>
             </div>

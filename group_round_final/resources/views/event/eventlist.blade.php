@@ -53,33 +53,31 @@
                     
                     <!-- Authentication Links -->
                     <div class="nav-link link-dark">
-                        @guest
+                        @if(!session()->has('LoggedUser'))
                             <span class="nav-item">
                                 <a class="nav-link link-dark" href="{{ route('login') }}">
-                                    <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __('登入/註冊') }}
+                                    <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __(' 登入/註冊') }}
                                 </a>
                             </span>
                         @else
-                            @if(session()->has('LoggedUser'))
-                            <span class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->userNickName }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('登出') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </span>
-                            @endif
-                        @endguest
+                        
+                        <div class="nav-item dropdown">
+                            <a type="button" id="navbarDropdown" class="nav-link link-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('img/user.svg') }}" type="image/gif" size="16x16">
+                                {{ __('會員中心') }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{-- {{ route('member.index', $user->userId) }} --}}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{-- {{ route('member.collect', $user->iserId) }} --}}">收藏的活動</a></li>
+                                <li><a class="dropdown-item" href="{{-- {{ route('member.Alter', $user->userId) }} --}}">修改資料</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}">
+                                    {{ __('登出') }}
+                                </a></li>
+                            </ul>
+                        </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
