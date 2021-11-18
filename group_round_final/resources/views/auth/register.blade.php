@@ -94,10 +94,6 @@
                                 <span for="userBirthday" class="input-group-text">生日</span>
                                 <input type="date" class="form-control bg-light" id="userBirthday" name="userBirthday">
                             </label>
-                            {{-- <div class="mb-3">
-                                <label for="userImg" class="form-label">頭像上傳</label>
-                                <input class="form-control" type="file" id="userImg" name="userImg" accept="image/png, image/jpeg">
-                            </div> --}}
                             <div class="mb-3">
                                 <label for="notice" class="form-label">注意事項</label>
                                 <section type="text" class="form-control bg-light overflow-auto" id="notice">
@@ -121,31 +117,6 @@
                         </div>
                         </div>
                     </div>
-
-
-                    {{-- <div class="form-group">
-                        <label for="email">Name</label>
-                        <input type="text" class="form-control bg-light" name="name" placeholder="Enter name" value="{{ old('name')}}">
-                        <span class="text-danger">@error('name'){{ $message }}@enderror</span>
-                        {{--^名稱與controller驗證相同/可把$message換成自訂字串^--}}
-                    {{--</div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control bg-light" name="email" placeholder="Enter email" value="{{ old('email')}}">
-                        <span class="text-danger">@error('email'){{ $message }}@enderror</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control bg-light" name="password" id="" placeholder="Enter password">
-                        <span class="text-danger">@error('password'){{ $message }}@enderror</span>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-block btn-primary">Register</button>
-                    </div>
-                    <br>
-                    <a href="login">Already have account?</a> --}}
-
-
                 </form>
             </div>
         </div>
