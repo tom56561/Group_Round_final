@@ -46,14 +46,6 @@ Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")
 Route::resource('/MemberAlter', 'App\Http\Controllers\MemberAlterController');
 //   ------------
 // serch
-/* Route::get('/mainpage', function(){
-  return view('mainpageA');
-});  // 首頁在這 */
-
-Route::get('/mainpageB', function(){
-  return view('mainpageB');
-});  
-
 Route::get('/eventlist', function(){
   return view('event/eventlist');
 })->name('eventlist'); // 活動列表
@@ -61,38 +53,6 @@ Route::get('/eventlist', function(){
 Route::get('/searchme', function(){
   return view('search/searchme');
 });
-
-Route::get('/searchmetag1', function(){
-  return view('search/searchmetag1');
-});  
-
-Route::get('/searchmetag2', function(){
-  return view('search/searchmetag2');
-});  
-
-Route::get('/searchmetag3', function(){
-  return view('search/searchmetag3');
-});  
-
-Route::get('/searchmetag4', function(){
-  return view('search/searchmetag4');
-});  
-
-Route::get('/searchmetag5', function(){
-  return view('search/searchmetag5');
-});  
-
-Route::get('/searchmetag6', function(){
-  return view('search/searchmetag6');
-});  
-
-Route::get('/searchmetag7', function(){
-  return view('search/searchmetag7');
-});  
-
-Route::get('/searchmetag8', function(){
-  return view('search/searchmetag8');
-});  
 //   ------------
 // event 要測試登入狀態時就把後面middleware的註解拿掉
 Route::get('event/{id}', 'App\Http\Controllers\EventController@index');
