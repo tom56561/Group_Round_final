@@ -14,6 +14,8 @@ class EventController extends Controller
     function index($id) {
         if(session()->has('LoggedUser')){
             $user = User::where('userId', session('LoggedUser'))->first()->userId;
+        }else{
+            $user = 0;
         }
         $db = Event::find($id);
         // $db = DB::table('event')->where('eventId','=',$id);

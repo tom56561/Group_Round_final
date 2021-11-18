@@ -1,5 +1,23 @@
+
+<?php 
+use App\Models\user;
+
+if(session()->has('LoggedUser')){
+$user = User::where('userId', session('LoggedUser'))->first()->userId;
+$conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
+$queryuser = mysqli_query($conn,"SELECT city FROM `citylist` INNER JOIN user on `citylist`.cityId = user.cityId WHERE userId = $user " );
+$resultuser = mysqli_fetch_array($queryuser);
+
+}
+
+else {
+    $resultuser["city"]="台中市";
+}
+
+?>
+
 <?php
-$keyword="台中";
+$keyword=$resultuser["city"];
 $select="";
 ?>
 
@@ -17,7 +35,6 @@ $select="";
     <link rel="stylesheet" href="{{ url('/css/ActCss/actSearch.css') }}">
     <link rel="stylesheet" href="{{ url('/css/mainpage.css') }}">
     <link href="{{ url('/css/customForAll.css') }}" rel="stylesheet">
-    <script src="{{ URL::asset('js/bootstrap.bundle.js' )}}"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" language="javascript">google.load("jquery", "1.3.2");</script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
@@ -28,8 +45,8 @@ $select="";
             background-color: #ff8801c0;
             text-align: center;
             line-height:40px;
-            color: white;
-        }
+            color: white;}
+        
         /* -----------------快閃訊息------------------------------------ */
         
         </style>
@@ -162,9 +179,12 @@ $select="";
         <br><br><br><br><br>
     </div>
 
-    <div class="MainPageText">
-        <h1>台中附近的推薦活動</h1>
-    </div>
+    <?php
+    echo
+    '<div class="MainPageText">
+        <h1>'.$resultuser["city"].'附近的推薦活動</h1>
+    </div>'
+    ?>
     
     <?php
             $conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
@@ -191,7 +211,9 @@ $select="";
                 $DateTime = $result['eventDateTime'];
                 $eventDateTime = date('Y-m-d H:i', strtotime($DateTime));
               echo 
-              "     <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
+              "     
+                    <a href='/event/".$result['eventId']."' target='_blank'>
+                    <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
                      <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;'  alt='...'>
                      <div class='card-body'>
                         <h4 class='card-text'>".$result['eventTitle']."</h4>
@@ -200,14 +222,16 @@ $select="";
                       <small class='text-muted'>地點:".$result['city'].'&nbsp&nbsp&nbsp'.'時間:'.$eventDateTime."</small>
                       </div>
                      </div>  
+                     </a>
              "; }
                 
             
               
               ?>
-          
-              <a class="btn btn-outline-secondary" id="MoreButton" role="button" href="/searchmetag1">看更多...</a>  
-             
+              <?php
+              echo
+              '<a class="btn btn-outline-secondary" id="MoreButton" role="button" href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword='.$keyword.'&searchBtn=搜尋">看更多...</a> ' 
+              ?>  
               <br><br><br><br><br>
 
     <div class="MainPageText">
@@ -234,7 +258,9 @@ $select="";
                 $eventDateTime = date('Y-m-d H:i', strtotime($DateTime));
               echo 
               
-              "      <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
+              "      
+                    <a href='/event/".$result['eventId']."' target='_blank'>
+                     <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
                      <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;' alt='...'>
                      <div class='card-body'>
                         <h4 class='card-text'>".$result['eventTitle']."</h4>
@@ -243,6 +269,7 @@ $select="";
                       <small class='text-muted'>地點:".$result['city'].'&nbsp&nbsp&nbsp'.'時間:'.$eventDateTime."</small>
                       </div>
                      </div>  
+                     </a>
              "; }
               ?>
               <a class="btn btn-outline-secondary" id="MoreButton" href="{{ route('eventlist')}}" role="button">看更多...</a>

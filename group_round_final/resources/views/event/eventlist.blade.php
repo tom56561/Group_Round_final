@@ -13,9 +13,6 @@
     <link rel="stylesheet" href="{{ url('/css/ActCss/actSearch.css') }}">
     <link rel="stylesheet" href="{{ url('/css/mainpage.css') }}">
     <link href="{{ url('/css/customForAll.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ URL::asset('js/bootstrap.bundle.js' )}}"></script>
-    <script src="{{ URL::asset('js/jquery-3.6.0.min.js' )}}"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" language="javascript">google.load("jquery", "1.3.2");</script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
@@ -59,29 +56,31 @@
                         @guest
                             <span class="nav-item">
                                 <a class="nav-link link-dark" href="{{ route('login') }}">
-                                    <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __(' 登入/註冊') }}
+                                    <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __('登入/註冊') }}
                                 </a>
                             </span>
+                        @else
+                            @if(session()->has('LoggedUser'))
+                            <span class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->userNickName }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                        {{ __('登出') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </span>
+                            @endif
                         @endguest
-                        
-                        {{-- @auth --}}
-                        <div class="nav-item dropdown">
-                            <a type="button" id="navbarDropdown" class="nav-link link-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('img/user.svg') }}" type="image/gif" size="16x16">
-                                {{ __('會員中心') }}
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.index', $user->userId) }} --}}">我的頁面</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.collect', $user->iserId) }} --}}">收藏的活動</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.Alter', $user->userId) }} --}}">修改資料</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}">
-                                    {{ __('登出') }}
-                                </a></li>
-                            </ul>
-                            </div>
-                        </div>
-                        {{-- @endauth --}}
+                    </div>
                 </div>
             </div>
             </div>
@@ -125,35 +124,35 @@
       
       <div class="container" style="display: flex;justify-content: center ;align-items: center;">
 
-          <a href="search/searchmetag1">   
+          <a href="/searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=台中&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn1" name="TagBtn">台中</span></div>
           </a>
           
-          <a href="search/searchmetag2">   
+          <a href="/searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=台南&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn2" name="TagBtn">台南</span></div>
           </a>
           
-          <a href="search/searchmetag3">   
+          <a href="/searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=台北&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn3" name="TagBtn">台北</span></div>
           </a>
           
-          <a href="search/searchmetag4">   
+          <a href="/searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=狼人殺&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn4" name="TagBtn">狼人殺</span></div>
           </a>
 
-          <a href="search/searchmetag5">   
+          <a href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=新北&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn5" name="TagBtn">新北</span></div>
           </a>
           
-          <a href="search/searchmetag6">   
+          <a href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=密室脫逃&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn6" name="TagBtn">密室脫逃</span></div>
           </a>
 
-          <a href="search/searchmetag7">   
+          <a href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=運動&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn7" name="TagBtn">運動</span></div>
           </a>
           
-          <a href="search/searchmetag8">   
+          <a href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=高雄&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn8" name="TagBtn">高雄</span></div>
           </a>
 
@@ -187,15 +186,18 @@
 
               echo 
               
-              "      <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
-                     <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;' alt='...'>
-                     <div class='card-body'>
-                        <h4 class='card-text'>".$result['eventTitle']."</h4>
-                     </div>
-                     <div class='card-footer name'>
-                      <small class='text-muted'>地點:".$result['city'].'&nbsp&nbsp&nbsp'.'時間:'.$eventDateTime."</small>
-                      </div>
-                     </div>  
+              "    
+              <a href='/event/".$result['eventId']."' target='_blank'>
+              <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
+              <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;'  alt='...'>
+              <div class='card-body'>
+                <h4 class='card-text'>".$result['eventTitle']."</h4>
+              </div>
+              <div class='card-footer name'>
+               <small class='text-muted'>地點:".$result['city'].'&nbsp&nbsp&nbsp'.'時間:'.$eventDateTime."</small>
+               </div>
+              </div>  
+              </a>
              "; }
 
 
