@@ -1,5 +1,23 @@
+
+<?php 
+use App\Models\user;
+
+if(session()->has('LoggedUser')){
+$user = User::where('userId', session('LoggedUser'))->first()->userId;
+$conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
+$queryuser = mysqli_query($conn,"SELECT city FROM `citylist` INNER JOIN user on `citylist`.cityId = user.cityId WHERE userId = $user " );
+$resultuser = mysqli_fetch_array($queryuser);
+
+}
+
+else {
+    $resultuser["city"]="台中市";
+}
+
+?>
+
 <?php
-$keyword="台中";
+$keyword=$resultuser["city"];
 $select="";
 ?>
 
@@ -17,9 +35,14 @@ $select="";
     <link rel="stylesheet" href="{{ url('/css/ActCss/actSearch.css') }}">
     <link rel="stylesheet" href="{{ url('/css/mainpage.css') }}">
     <link href="{{ url('/css/customForAll.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ URL::asset('js/bootstrap.bundle.js' )}}"></script>
+    <script src="{{ URL::asset('js/jquery-3.6.0.min.js' )}}"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" language="javascript">google.load("jquery", "1.3.2");</script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <style>
         
         /* -----------------快閃訊息------------------------------------ */
@@ -27,8 +50,8 @@ $select="";
             background-color: #ff8801c0;
             text-align: center;
             line-height:40px;
-            color: white;
-        }
+            color: white;}
+        
         /* -----------------快閃訊息------------------------------------ */
         
         </style>
@@ -76,33 +99,31 @@ $select="";
                     
                     <!-- Authentication Links -->
                     <div class="nav-link link-dark">
-                        @guest
+                        @if(!session()->has('LoggedUser'))
                             <span class="nav-item">
                                 <a class="nav-link link-dark" href="{{ route('login') }}">
-                                    <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __('登入/註冊') }}
+                                    <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __(' 登入/註冊') }}
                                 </a>
                             </span>
                         @else
-                            {{-- @auth --}}
-                            <span class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href={{ route('profile')}} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ __('會員中心') }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('登出') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </span>
-                            {{-- @endauth --}}
-                        @endguest
+                        
+                        <div class="nav-item dropdown">
+                            <a type="button" id="navbarDropdown" class="nav-link link-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('img/user.svg') }}" type="image/gif" size="16x16">
+                                {{ __('會員中心') }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('member.index', $user) }}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.collect', $user) }}">收藏的活動</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.Alter', $user) }}">修改資料</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}">
+                                    {{ __('登出') }}
+                                </a></li>
+                            </ul>
+                        </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -110,10 +131,63 @@ $select="";
         </nav>
     </header>
     <body style="background-color:  #f6f7f8;">
+    {{-- 原bnner --}}
     <div class="MainPageBanner">
         <img src="../img/mainpagepic1.png" id="MainPagePicture" style="width: 100%;">
     </div>
-
+    {{-- 幻燈片 --}}
+    {{-- <div id="banner" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#banner" data-slide-to="0" class="active"></li>
+                <li data-target="#banner" data-slide-to="1"></li>
+                <li data-target="#banner" data-slide-to="2"></li>
+                <li data-target="#banner" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner MainPageBanner">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/1200/200?random=5" class="d-block w-100" alt="picture1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>GROUP ROUND</h1>
+                        <p>團團轉共遊平台</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/1200/200?random=7" class="d-block w-100" alt="picture2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>GROUP ROUND</h1>
+                        <p>團團轉共遊平台</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/1200/200?random=9" class="d-block w-100" alt="picture3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>GROUP ROUND</h1>
+                        <p>團團轉共遊平台</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/1200/200?random=11" class="d-block w-100" alt="picture3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>GROUP ROUND</h1>
+                        <p>團團轉共遊平台</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#banner" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#banner" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+    </div> --}}
+    
+    {{-- 按鈕 --}}
     <div class="MainPageButtonAll">
         <div class="MainPageButton">
             <a href="{{ route('eventcreate') }}">
@@ -160,11 +234,15 @@ $select="";
                 <input type="submit" class="btn btn-orange btn-sm" id="searchBtn" name="searchBtn" value="搜尋">
             </div>
         </form> 
+        
     </div>
 
-    <div class="MainPageText">
-        <h1>台中附近的推薦活動</h1>
-    </div>
+    <?php
+    echo
+    '<div class="MainPageText">
+        <h1>'.$resultuser["city"].'附近的推薦活動</h1>
+    </div>'
+    ?>
     
     <?php
             $conn = mysqli_connect("remotemysql.com:3306","IzcvVhMfaH","yoHovlKfkZ","IzcvVhMfaH")or die ("Error in conneciton");
@@ -191,7 +269,9 @@ $select="";
                 $DateTime = $result['eventDateTime'];
                 $eventDateTime = date('Y-m-d H:i', strtotime($DateTime));
               echo 
-              "     <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
+              "     
+                    <a href='/event/".$result['eventId']."' target='_blank'>
+                    <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
                      <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;'  alt='...'>
                      <div class='card-body'>
                         <h4 class='card-text'>".$result['eventTitle']."</h4>
@@ -200,15 +280,17 @@ $select="";
                       <small class='text-muted'>地點:".$result['city'].'&nbsp&nbsp&nbsp'.'時間:'.$eventDateTime."</small>
                       </div>
                      </div>  
+                     </a>
              "; }
                 
             
               
               ?>
-          
-              <a class="btn btn-outline-secondary" id="MoreButton" role="button" href="/searchmetag1">看更多...</a>  
-             
-              <br><br><br><br><br>
+              <?php
+              echo
+              '<a class="btn btn-outline-secondary" id="MoreButton" role="button" href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword='.$keyword.'&searchBtn=搜尋">看更多...</a> ' 
+              ?>  
+              
 
     <div class="MainPageText">
         <h1>其他的推薦活動</h1>
@@ -234,7 +316,9 @@ $select="";
                 $eventDateTime = date('Y-m-d H:i', strtotime($DateTime));
               echo 
               
-              "      <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
+              "      
+                    <a href='/event/".$result['eventId']."' target='_blank'>
+                     <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
                      <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;' alt='...'>
                      <div class='card-body'>
                         <h4 class='card-text'>".$result['eventTitle']."</h4>
@@ -243,6 +327,7 @@ $select="";
                       <small class='text-muted'>地點:".$result['city'].'&nbsp&nbsp&nbsp'.'時間:'.$eventDateTime."</small>
                       </div>
                      </div>  
+                     </a>
              "; }
               ?>
               <a class="btn btn-outline-secondary" id="MoreButton" href="{{ route('eventlist')}}" role="button">看更多...</a>

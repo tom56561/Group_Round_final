@@ -31,10 +31,10 @@
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="rememberAccount" name="rememberAccount">
                                 <input type="hidden" class="form-check-input" id="noticeCheck" name="noticeCheck" value="0">
-                                <label class="form-check-label" for="rememberAccount" value="1">記住帳號</label> {{--還沒做--}}
+                                <label class="form-check-label" for="rememberAccount" value="1">記住帳號</label> 
                             </div>
                             <div class="mb-5">
-                                <a href="{{----}}" id="resetPassword" class="form-text">忘記密碼</a> {{--還沒做--}}
+                                <a href="{{----}}" id="resetPassword" class="form-text">忘記密碼</a>
                             </div>
                             <div class="container d-flex justify-content-around">
                                 <a href="register" class="btn btn-outline-primary" type="submit" value="register">註冊</a>
@@ -42,23 +42,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control bg-light" name="email" placeholder="Enter email" value="{{ old('email')}}">
-                        <span class="text-danger">@error('email'){{ $message }}@enderror</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control bg-light" name="password" id="" placeholder="Enter password">
-                        <span class="text-danger">@error('password'){{ $message }}@enderror</span>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-block btn-primary">Login</button>
-                    </div>
-                    <br>
-                    <a href="register">Create an new Account</a> --}}
-
                 </form>
             </div>
         </div>

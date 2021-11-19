@@ -44,7 +44,7 @@ class UserAuthController extends Controller
             'cityId'=>'required',
             'userGender'=>'required',
             'userBirthday'=>'required',
-            'userImg'=>'mimes:jpg,png,jpeg|max:3072',
+            // 'userImg'=>'mimes:jpg,png,jpeg|max:3072',
             'noticeCheck'=>'required|in:1'
         ]);
         
@@ -77,7 +77,7 @@ class UserAuthController extends Controller
             'cityId'=>$request->cityId,
             'userGender'=>$request->userGender,
             'userBirthday'=>$request->userBirthday,
-            'userImg'=>$request->userImg,
+            // 'userImg'=>$request->userImg,
         ]); 
 
         if($query){
@@ -86,11 +86,6 @@ class UserAuthController extends Controller
             return back()->with('fail', '發生錯誤，請再提交一次');
         }
     }
-
-    // 註冊後跳轉至登入頁面
-    /* function success(){
-        return view('');
-    } */
 
     // 登入表單格式檢查
     function check(Request $request){
@@ -119,11 +114,6 @@ class UserAuthController extends Controller
         }
     }
 
-    // 登入後跳轉
-    /* function previous(){
-        return view('auth/login'); // 還沒設定
-    } */
-
     function profile(){
         // return view('member/profile');
 
@@ -136,9 +126,9 @@ class UserAuthController extends Controller
                 'LoggedUserInfo'=>$user
             ];
         }
-        // return view('member/profile', $data);
+        return view('member/profile', $data);
         // return redirect()->intended('member/index', $data);
-        return back()->with('success','登入成功');
+        // return back()->with('success','登入成功');
     }
 
     function logout(){

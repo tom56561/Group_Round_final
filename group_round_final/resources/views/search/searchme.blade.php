@@ -1,11 +1,19 @@
 
 <?php 
 //獲取搜索關鍵字
-$keyword=$_GET["keyword"];
-$select=$_GET["select"];
+if (isset($_GET["keyword"])){
+    $keyword=$_GET["keyword"];
+    $select=$_GET["select"];
+}
+else{
+    header('Location:/eventlist');
+    exit();
+}
+    
 
 
  ?>
+ 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,15 +29,25 @@ $select=$_GET["select"];
     <link rel="stylesheet" href="../css/ActCss/actSearch.css">
     <link rel="stylesheet" href="/css/mainpage.css">
     <link href="/css/customForAll.css" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ URL::asset('js/bootstrap.bundle.js' )}}"></script>
+    <script src="{{ URL::asset('js/jquery-3.6.0.min.js' )}}"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" language="javascript">google.load("jquery", "1.3.2");</script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js">
-</script>
-</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <style>
 
     </style>
 </head>
+<?php
+use App\Models\User;
+
+$user = 0; 
+if(session()->has('LoggedUser')){
+    $user = User::where('userId', session('LoggedUser'))->first()->userId;
+}
+
+?>
 
 <body>
     <!-- 頁首 -->
@@ -53,43 +71,33 @@ $select=$_GET["select"];
                         </li>
                     </ul>
 
-                    {{-- <form class="d-flex">
-                        <!-- 搜尋 -->
-                        <input class="form-control me-2 bg-light" type="search" placeholder="搜尋..." aria-label="Search">
-                        <a href="{{ route('eventlist')}}"><button class="btn btn-secondary btn-sm" type="submit">
-                            <img src="{{ asset('img/search.svg') }}" type="image/gif" size="16x16"></button>
-                        </a>
-                    </form> --}}
-                    
                     <!-- Authentication Links -->
                     <div class="nav-link link-dark">
-                        @guest
+                        @if(!session()->has('LoggedUser'))
                             <span class="nav-item">
                                 <a class="nav-link link-dark" href="{{ route('login') }}">
-                                    <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __('登入/註冊') }}
+                                    <img src="{{ asset('img/log-in.svg') }}" type="image/gif" size="16x16">{{ __(' 登入/註冊') }}
                                 </a>
                             </span>
                         @else
-                            @if(session()->has('LoggedUser'))
-                            <span class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->userNickName }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('登出') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </span>
-                            @endif
-                        @endguest
+                        
+                        <div class="nav-item dropdown">
+                            <a type="button" id="navbarDropdown" class="nav-link link-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('img/user.svg') }}" type="image/gif" size="16x16">
+                                {{ __('會員中心') }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('member.index', $user) }}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.collect', $user) }}">收藏的活動</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.Alter', $user) }}">修改資料</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}">
+                                    {{ __('登出') }}
+                                </a></li>
+                            </ul>
+                        </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -135,35 +143,35 @@ $select=$_GET["select"];
       
             <div class="container" style="display: flex;justify-content: center ;align-items: center;">
 
-            <a href="/searchmetag1">   
+            <a href="/searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=台中&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn1" name="TagBtn">台中</span></div>
           </a>
           
-          <a href="/searchmetag2">   
+          <a href="/searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=台南&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn2" name="TagBtn">台南</span></div>
           </a>
           
-          <a href="/searchmetag3">   
+          <a href="/searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=台北&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn3" name="TagBtn">台北</span></div>
           </a>
           
-          <a href="/searchmetag4">   
+          <a href="/searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=狼人殺&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn4" name="TagBtn">狼人殺</span></div>
           </a>
 
-          <a href="/searchmetag5">   
+          <a href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=新北&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn5" name="TagBtn">新北</span></div>
           </a>
           
-          <a href="/searchmetag6">   
+          <a href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=密室脫逃&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn6" name="TagBtn">密室脫逃</span></div>
           </a>
 
-          <a href="/searchmetag7">   
+          <a href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=運動&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn7" name="TagBtn">運動</span></div>
           </a>
           
-          <a href="/searchmetag8">   
+          <a href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword=高雄&searchBtn=搜尋">   
           <div class="box"><span class="btn ActTags rounded-pill fw-bolder me-5" id="TagBtn8" name="TagBtn">高雄</span></div>
           </a>
 
@@ -201,8 +209,11 @@ $select=$_GET["select"];
             while ($result = mysqli_fetch_array($query)){
                 $DateTime = $result['eventDateTime'];
                 $eventDateTime = date('Y-m-d H:i', strtotime($DateTime));
+                
               echo 
-              "     <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
+              "     
+                     <a href='/event/".$result['eventId']."' target='_blank'>
+                     <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
                      <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;'  alt='...'>
                      <div class='card-body'>
                         <h4 class='card-text'>".$result['eventTitle']."</h4>
@@ -211,6 +222,8 @@ $select=$_GET["select"];
                       <small class='text-muted'>地點:".$result['city'].'&nbsp&nbsp&nbsp'.'時間:'.$eventDateTime."</small>
                       </div>
                      </div>  
+                     </a>
+                     
              "; }
 
                 
@@ -224,14 +237,14 @@ $select=$_GET["select"];
 <?php
     //分頁頁碼
     echo '共 '.$data_nums.' 個活動,目前在第 '.$page.' 頁,共 '.$pages.' 頁';
-    echo "<br /><a href=?page=1>首頁</a> ";
+    echo "<br /><a href=searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=".$select."&keyword=".$keyword."&searchBtn=搜尋=&page=1>首頁</a> ";
     echo "第 ";
     for( $i=1 ; $i<=$pages ; $i++ ) {
         if ( $page-3 < $i && $i < $page+3 ) {
-            echo "<a href=?page=".$i.">".$i."</a> ";
+            echo "<a href=searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=".$select."&keyword=".$keyword."&searchBtn=搜尋=&page=".$i.">".$i."</a> ";
         }
     }
-    echo " 頁 <a href=?page=".$pages.">末頁</a><br /><br />";
+    echo " 頁 <a href=searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=".$select."&keyword=".$keyword."&searchBtn=搜尋=&page=".$pages.">末頁</a><br /><br />";
 ?>
 
 
