@@ -285,7 +285,7 @@
 
                         {{-- 判斷使用者是否舉舉辦者 --}}
                     @if ($holduser === $user)
-                        <form method="get" action="/event/edit1/{{$id}}" enctype="multipart/form-data" class="d-inline">
+                        <form method="get" action="/edit1/{{$id}}" enctype="multipart/form-data" class="d-inline">
                             @csrf
                         <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="編輯活動" />
                         </form>

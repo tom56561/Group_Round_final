@@ -21,7 +21,7 @@
 <script>
     $(function () {
 
-       $(".category ").click(function () {
+       $(".category ").click(function () {  //圖片選定後的變化
           $(this).find("p").toggleClass('font-main');
           $('img',this).toggle();
           $(this).find("img:first").toggleClass("selected");
@@ -30,7 +30,8 @@
         
     })
 
-    function getSelectedId(){   //取得所選圖片id
+    //創建活動
+    function holdevent(){   //取得所選圖片id
         var a =[];
         i=0;
         $(".selected").each(function(){
@@ -38,7 +39,6 @@
             i++;
         });
 
- 
         $.ajax({          //ajax傳送到後端
             type: "POST",
             url: "/holdevent/store1",
@@ -46,35 +46,28 @@
             success: function(test){
              window.location.href="holdevent2";}
         });
-
     }
 
+    //編輯活動
+    function edit(){   //取得所選圖片id
+        var a =[];
+        i=0;
+        $(".selected").each(function(){
+            a[i] = $(this).attr('id')
+            i++;
+        });
 
-    // $(".next").click(function(){
+        $.ajax({          //ajax傳送到後端
+            type: "POST",
+            url: "/edit/store1/{{$id}}",
+            data: {'array':a,'_token':'{{csrf_token()}}'},
+            success: function(test){
+            console.log("success");
+             window.location.href="/edit2/{{$id}}"}
+        });
+    }
+    
 
-    //     console.log("next");
-    // })
-
-    // $.ajax({
-
-    // })
-
-
-    // $(".tog").click(function () {
-    //     $('img',this).toggle();
-    //     $(this).find("img:first").toggleClass("seleted");
-    // });
-
-
-    // $(".tog img").click(function () {
-    //     const src = $(this).attr("src");
-    //     var newSrc = src.slice(0,-4);
-    //     console.log(src);
-    //     console.log(newSrc);
-    //     var togSrc = [ src, newSrc+'-focus.png')}}' ];
-    //     this.src =  togSrc.reverse()[0];
-    //     newSrc = src;
-    // });
 
 </script>
 <?php
@@ -306,8 +299,11 @@ if(session()->has('LoggedUser')){
 
         <!-- Button -->
         <div class="d-flex justify-content-end mb-4">
-            <!-- <input class="px-3 btn btn-secondary" id="btn" type="button" onclick="" value="上一步" /> -->
-            <input class="px-3 btn btn-main next" id="btn" type="submit" onclick="getSelectedId()" value="下一步" />
+            @if (isset($id))                
+            <input class="px-3 btn btn-main next" id="btn" type="submit" onclick="edit()" value="更新" />
+            @else
+            <input class="px-3 btn btn-main next" id="btn" type="submit" onclick="holdevent()" value="下一步" />
+            @endif
         </div>
     </div>
 

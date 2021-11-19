@@ -100,19 +100,28 @@
         </div>
 
         <!-- Information -->
-        <form method="post" action="/holdevent/store2" enctype="multipart/form-data" class="form-horizontal">
+        <form method="post" 
+        @if (isset($id))  
+            action="/edit/store2/{{$id}}"
+        @else          
+            action="/holdevent/store2" 
+        @endif
+        enctype="multipart/form-data" class="form-horizontal">
             @csrf
         <div class="row py-4">
                 <!-- Left -->
                 <div class="col-6">
                     <div>
                         <label for="title" class="form-label h4">活動名稱：</label>
-                        <input class="form-control bg-main" type="text" name="title" id="title" size="50">
+                        {{-- 編輯活動使用isset判斷，並顯示原始的活動標題 --}}
+                        <input class="form-control bg-main" type="text" name="title" id="title" size="50" 
+                        @isset($eventTitle) value="{{$eventTitle}}"@endisset>
                     </div>
     
                     <div class="mt-3">
                         <label for="content" class="form-label h4">活動內容與說明：</label>
-                        <textarea class="form-control bg-main" name="content" id="content" rows="15"></textarea>
+                        {{-- 編輯活動使用isset判斷，並顯示原始的活動內容 --}}
+                        <textarea class="form-control bg-main" name="content" id="content" rows="15">@isset($eventContent){{$eventContent}}@endisset</textarea>
                     </div>
     
                 </div>
@@ -121,19 +130,25 @@
                     <div>
                         <label for="file" class="form-label h4">上傳圖片：</label>
                         <input class="form-control" onchange="readURL(this)"
-                        type="file" name="img" id="img" 
+                        type="file" name="img" id="img"
                         targetID="demoImg" accept="image/gif, image/jpeg, image/png"/>
                     </div>
+                    {{-- 編輯活動使用if判斷，並顯示原始的活動照片 --}}
                     <div class="img-frame">
                         <img class="img-content mt-4" id="demoImg"
-                        src="https://via.placeholder.com/300x400/FFFFFF?text=預覽圖片" alt="">
+                        @if(isset($eventImg))
+                        src="{{ asset('eventImg/'.$eventImg) }}"
+                        @else
+                        src="https://via.placeholder.com/300x400/FFFFFF?text=預覽圖片"
+                        @endif
+                        alt="">
                     </div>
                 </div>
             </div>
             
             <!-- Button -->
             <div class="d-flex justify-content-between mb-2">
-                <input class="px-3 btn btn-secondary" id="btn" type="button" onclick="" value="上一步" />
+                <a href="{{ url('/back')}}" class="px-3 btn btn-secondary">上一步</a>
                 <input class="px-3 btn btn-main" id="btn" type="submit" onclick="" value="下一步" />
             </div>
         </div>

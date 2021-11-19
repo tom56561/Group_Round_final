@@ -53,24 +53,69 @@ Route::get('/eventlist', function(){
 Route::get('/searchme', function(){
   return view('search/searchme');
 });
+
+
+Route::get('/searchmetag1', function(){
+  return view('search/searchmetag1');
+});  
+
+Route::get('/searchmetag2', function(){
+  return view('search/searchmetag2');
+});  
+
+Route::get('/searchmetag3', function(){
+  return view('search/searchmetag3');
+});  
+
+Route::get('/searchmetag4', function(){
+  return view('search/searchmetag4');
+});  
+
+Route::get('/searchmetag5', function(){
+  return view('search/searchmetag5');
+});  
+
+Route::get('/searchmetag6', function(){
+  return view('search/searchmetag6');
+});  
+
+Route::get('/searchmetag7', function(){
+  return view('search/searchmetag7');
+});  
+
+Route::get('/searchmetag8', function(){
+  return view('search/searchmetag8');
+});  
+
+
 //   ------------
-// event 要測試登入狀態時就把後面middleware的註解拿掉
+//活動頁面
 Route::get('event/{id}', 'App\Http\Controllers\EventController@index');
+//上一頁
+Route::get('/back', function(){
+  return redirect()->back();
+});
+//創建活動
 Route::get('holdevent1', 'App\Http\Controllers\EventController@index1')->name('eventcreate')->middleware('isLogged');
 Route::get('holdevent2', 'App\Http\Controllers\EventController@index2')->middleware('isLogged');
 Route::get('holdevent3', 'App\Http\Controllers\EventController@index3')->middleware('isLogged');
 Route::get('holdevent4', 'App\Http\Controllers\EventController@index4')->middleware('isLogged');
-Route::any('holdevent/store1', 'App\Http\Controllers\EventController@store1');
-Route::any('holdevent/store2', 'App\Http\Controllers\EventController@store2');
-Route::any('holdevent/store3', 'App\Http\Controllers\EventController@store3');
+Route::post('holdevent/store1', 'App\Http\Controllers\EventController@store1');
+Route::post('holdevent/store2', 'App\Http\Controllers\EventController@store2');
+Route::post('holdevent/store3', 'App\Http\Controllers\EventController@store3');
+//活動參加、取消、收藏
 Route::post('event/join/{id}', 'App\Http\Controllers\EventController@join');
 Route::post('event/cancel/{id}', 'App\Http\Controllers\EventController@cancel');
 Route::post('event/like/{id}', 'App\Http\Controllers\EventController@like');
+//編輯活動（舉辦人)
+Route::get('edit1/{id}', 'App\Http\Controllers\EventController@editIndex1');
+Route::get('edit2/{id}', 'App\Http\Controllers\EventController@editIndex2');
+Route::get('edit3/{id}', 'App\Http\Controllers\EventController@editIndex3');
+Route::get('edit4/{id}', 'App\Http\Controllers\EventController@editIndex4');
+Route::post('edit/store1/{id}', 'App\Http\Controllers\EventController@edit1');
+Route::post('edit/store2/{id}', 'App\Http\Controllers\EventController@edit2');
+Route::post('edit/store3/{id}', 'App\Http\Controllers\EventController@edit3');
 
-Route::get('event/edit1/{id}', 'App\Http\Controllers\EventController@edit1');
-Route::get('event/edit2/{id}', 'App\Http\Controllers\EventController@edit2');
-Route::get('event/edit3/{id}', 'App\Http\Controllers\EventController@edit3');
-Route::get('event/edit4/{id}', 'App\Http\Controllers\EventController@edit4');
 //   ------------
 // feedback
 Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')->middleware('isLogged');
