@@ -179,7 +179,7 @@ $select="";
                 <input type="submit" class="btn btn-orange btn-sm" id="searchBtn" name="searchBtn" value="搜尋">
             </div>
         </form> 
-        <br><br><br><br><br>
+        
     </div>
 
     <?php
@@ -235,7 +235,7 @@ $select="";
               echo
               '<a class="btn btn-outline-secondary" id="MoreButton" role="button" href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword='.$keyword.'&searchBtn=搜尋">看更多...</a> ' 
               ?>  
-              <br><br><br><br><br>
+              
 
     <div class="MainPageText">
         <h1>其他的推薦活動</h1>
