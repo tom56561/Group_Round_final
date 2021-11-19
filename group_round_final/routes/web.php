@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomepageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +18,7 @@ use App\Http\Controllers\HomeController;
 /* Route::get('/', function(){
   return view('homepage');
 })->name('home'); */
-Route::get('/', [HomeController::class, 'user_identity'])->name('home');
+Route::get('/', [HomepageController::class, 'user_identity'])->name('home');
 //   ------------
 
 Route::get('login', [UserAuthController::class, 'login'])->name('login')->middleware('alreadyLoggedIn'); // alreadyLoggedIn是防止在已登入狀態下看到登入和註冊頁面

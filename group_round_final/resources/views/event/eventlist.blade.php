@@ -23,7 +23,15 @@
 
     </style>
 </head>
+<?php
+use App\Models\User;
 
+$user = 0; 
+if(session()->has('LoggedUser')){
+    $user = User::where('userId', session('LoggedUser'))->first()->userId;
+}
+
+?>
 <body style="background-color:  #f6f7f8;">
     <!-- 頁首 -->
     <!-- 頁首 -->
@@ -70,9 +78,9 @@
                                 {{ __('會員中心') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.index', $user->userId) }} --}}">我的頁面</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.collect', $user->iserId) }} --}}">收藏的活動</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.Alter', $user->userId) }} --}}">修改資料</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.index', $user) }}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.collect', $user) }}">收藏的活動</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.Alter', $user) }}">修改資料</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">
                                     {{ __('登出') }}
