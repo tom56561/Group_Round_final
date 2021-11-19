@@ -94,46 +94,28 @@
                 class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-main rounded-pill"
                 style="width: 2rem; height:2rem;">3</button>
         </div>
-
-        <!-- <div class="row py-4">
-
-            <div class="col-6">
-                <div>
-                    <label for="title" class="form-label pb-2 h4">活動時間：</label>
-                    <input class="form-control bg-main" type="text" id="title">
-                </div>
-                <div class="mt-5">
-                    <label for="title" class="form-label pb-2 h4">活動地點：</label>
-                    <input class="form-control bg-main" type="text" id="title">
-                </div>
-                <div class="mt-5">
-                    <label for="title" class="form-label pb-2 h4">參加人數：</label>
-                    <input class="form-control bg-main" type="text" id="title">
-                </div>
-                <div class="mt-5">
-                    <label for="title" class="form-label pb-2 h4">性別限制：</label>
-                    <input class="form-control bg-main" type="text" id="title">
-                </div>
-
-
-            </div>
-            <div class="col-6">
-                <div>
-                    <label for="content" class="form-label pb-2 h4">注意事項：</label>
-                    <textarea class="form-control bg-main" id="content" rows="18"></textarea>
-                </div>
-            </div>
-        </div> -->
         <!-- Information -->
-        <form method="post" action="/holdevent/store3" class="form-horizontal">
+        <form method="post" 
+        @if (isset($id))  
+            action="/edit/store3/{{$id}}"
+        @else          
+            action="/holdevent/store3" 
+        @endif
+        class="form-horizontal">
             @csrf
             <div class="row py-4">
                 {{-- Left --}}
                 <div class="col-6">
                     <div>
                         <label for="time" class="form-label pb-2 h4 d-block">活動時間：</label>
+                        {{-- 編輯活動使用if判斷，並顯示原始的活動時間 --}}
                         <input class="eventTime" type="datetime-local" id="time"
-                            name="time" value="2021-11-16T19:30"
+                            name="time" 
+                            @if (isset($eventDateTime))
+                            value="{{$eventDateTime}}"
+                            @else
+                            value="2021-11-16T22:30"
+                            @endif
                             min="2021-11-16T00:00" max="2022-11-16T00:00">
                     </div>
                     <div class="mt-4 pt-3">
@@ -147,7 +129,7 @@
                             <option value="5">新竹縣</option>
                             <option value="6">新竹市</option>
                             <option value="7">苗栗縣</option>
-                            <option value="8">台中市</option>
+                            <option value="8" @isset($eventCity) selected @endisset>台中市</option>
                             <option value="9">彰化縣</option>
                             <option value="10">南投縣</option>
                             <option value="11">雲林縣</option>
@@ -176,7 +158,7 @@
                             <label class="form-check-label" for="flexRadioDefault2">限女生</label>
                         </div> 
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" value="n" id="flexRadioDefault3" >
+                            <input class="form-check-input" type="radio" name="gender" value="n" id="flexRadioDefault3" @isset($userGender) checked @endisset>
                             <label class="form-check-label" for="flexRadioDefault3">不限制</label>
                         </div>                    
                     </div>
@@ -186,18 +168,18 @@
                 <div class="col-6">
                     <div>
                         <label for="title" class="form-label pb-2 h4">活動地點：</label>
-                        <input class="form-control bg-main" type="text" name="location" id="location">
+                        <input class="form-control bg-main" type="text" name="location" id="location" @isset($eventLocation) value="{{$eventLocation}}"@endisset>
                     </div>
                     <div class="mt-4 pt-3">
                         <label for="title" class="form-label pb-2 h4">人數限制：</label>
-                        <input class="form-control bg-main" type="text" name="people" id="people">
+                        <input class="form-control bg-main" type="text" name="people" id="people" @isset($peopleNumber) value="{{$peopleNumber}}"@endisset>
                     </div>
                 </div>
             </div>
     
             <!-- Button -->
             <div class="d-flex justify-content-between mb-2 py-4">
-                <input class="px-3 btn btn-secondary" id="btn" type="button" onclick="" value="上一步" />
+                <a href="{{ url('/back')}}" class="px-3 btn btn-secondary">上一步</a>
                 <input class="px-3 btn btn-main" id="btn" type="submit" onclick="" value="下一步" />
             </div>
         </form>
