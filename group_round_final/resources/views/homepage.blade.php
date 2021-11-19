@@ -41,6 +41,8 @@ $select="";
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" language="javascript">google.load("jquery", "1.3.2");</script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <style>
         
         /* -----------------快閃訊息------------------------------------ */
@@ -129,10 +131,63 @@ $select="";
         </nav>
     </header>
     <body style="background-color:  #f6f7f8;">
+    {{-- 原bnner --}}
     <div class="MainPageBanner">
         <img src="../img/mainpagepic1.png" id="MainPagePicture" style="width: 100%;">
     </div>
-
+    {{-- 幻燈片 --}}
+    {{-- <div id="banner" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#banner" data-slide-to="0" class="active"></li>
+                <li data-target="#banner" data-slide-to="1"></li>
+                <li data-target="#banner" data-slide-to="2"></li>
+                <li data-target="#banner" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner MainPageBanner">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/1200/200?random=5" class="d-block w-100" alt="picture1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>GROUP ROUND</h1>
+                        <p>團團轉共遊平台</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/1200/200?random=7" class="d-block w-100" alt="picture2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>GROUP ROUND</h1>
+                        <p>團團轉共遊平台</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/1200/200?random=9" class="d-block w-100" alt="picture3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>GROUP ROUND</h1>
+                        <p>團團轉共遊平台</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/1200/200?random=11" class="d-block w-100" alt="picture3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>GROUP ROUND</h1>
+                        <p>團團轉共遊平台</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#banner" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#banner" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+    </div> --}}
+    
+    {{-- 按鈕 --}}
     <div class="MainPageButtonAll">
         <div class="MainPageButton">
             <a href="{{ route('eventcreate') }}">
