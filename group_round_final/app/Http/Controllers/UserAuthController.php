@@ -127,10 +127,6 @@ class UserAuthController extends Controller
             ];
         }
         return view('member/profile', $data);
-        return view('layouts/app', $data);
-        return view('layouts/alter', $data);
-        return view('layouts/main', $data);
-        return view('homepage', $data);
         // return redirect()->intended('member/index', $data);
         // return back()->with('success','登入成功');
     }

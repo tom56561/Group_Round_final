@@ -111,7 +111,7 @@ $select="";
                                 {{ __('會員中心') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.index', $LoggedUserInfo->userId) }} --}}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.index', $user_par) }}">我的頁面</a></li>
                                 <li><a class="dropdown-item" href="{{-- {{ route('member.collect', $LoggedUserInfo->userId) }} --}}">收藏的活動</a></li>
                                 <li><a class="dropdown-item" href="{{-- {{ route('member.Alter', $LoggedUserInfo->userId) }} --}}">修改資料</a></li>
                                 <li><hr class="dropdown-divider"></li>
@@ -179,7 +179,7 @@ $select="";
                 <input type="submit" class="btn btn-orange btn-sm" id="searchBtn" name="searchBtn" value="搜尋">
             </div>
         </form> 
-        <br><br><br><br><br>
+        
     </div>
 
     <?php
@@ -235,7 +235,7 @@ $select="";
               echo
               '<a class="btn btn-outline-secondary" id="MoreButton" role="button" href="searchme?_token=FZdtM6lmFSKhJzlCGbcTTs7IiZqOC0MmTfGKgdnV&select=&keyword='.$keyword.'&searchBtn=搜尋">看更多...</a> ' 
               ?>  
-              <br><br><br><br><br>
+              
 
     <div class="MainPageText">
         <h1>其他的推薦活動</h1>
