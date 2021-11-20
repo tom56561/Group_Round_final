@@ -67,9 +67,9 @@
                                 {{ __('會員中心') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('member.index', $user) }}">我的頁面</a></li>
-                                <li><a class="dropdown-item" href="{{ route('member.collect', $user) }}">收藏的活動</a></li>
-                                <li><a class="dropdown-item" href="{{ route('member.Alter', $user) }}">修改資料</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.index', $id) }}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.collect') }}">收藏的活動</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.Alter') }}">修改資料</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">
                                     {{ __('登出') }}

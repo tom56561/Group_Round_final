@@ -34,14 +34,14 @@ Route::get('logout', [UserAuthController::class, 'logout'])->name('logout');
 //   ------------
 // member
 Route::get('/member/{id}', "App\Http\Controllers\MemberController@index")->name( 'member.index' );
-Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF1', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF2', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF3', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF4', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF6', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged')->middleware('alreadyLoggedIn');
 
 // 修改會員資料
-Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
+Route::get('/memberF5', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
 Route::resource('/MemberAlter', 'App\Http\Controllers\MemberAlterController');
 //   ------------
 // serch
