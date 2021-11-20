@@ -108,8 +108,10 @@
             </div>
             <div class="d-flex flex-row col-4 align-items-center ps-5">
                 <div>
-                    <img class="rounded-circle bg-cover img-host"
-                        src="{{ asset('upload/'.$userImg) }}" alt="">
+                    <a href="{{ url('/member/'.$holduser)}}">
+                        <img class="rounded-circle bg-cover img-host"
+                            src="{{ asset('upload/'.$userImg) }}" alt="">
+                    </a>
                 </div>
                 <div class="ps-3">
                     <span class="d-block">舉辦人</span>
@@ -149,9 +151,12 @@
                         <div>
                             <ul class="row">                           
                                 @foreach ($userJoin as $person)
-                                <li class="col-2 me-2 pt-3"> <img class="rounded-circle bg-cover img-attendees"
-                                    src="{{ asset('storage/upload/'.$person->user->userImg) }}"
-                                    alt=""></li>
+                                <li class="col-2 me-2 pt-3"> 
+                                    <a href="{{ url('/member/'.$person->userId)}}">
+                                        <img class="rounded-circle bg-cover img-attendees"
+                                        src="{{ asset('/upload/'.$person->user->userImg) }}">
+                                    </a>
+                                </li>
                                 @endforeach
                             </ul>
 
