@@ -132,11 +132,11 @@ $select="";
     </header>
     <body style="background-color:  #f6f7f8;">
     {{-- 原bnner --}}
-    <div class="MainPageBanner">
+    {{-- <div class="MainPageBanner">
         <img src="../img/mainpagepic1.png" id="MainPagePicture" style="width: 100%;">
-    </div>
+    </div> --}}
     {{-- 幻燈片 --}}
-    {{-- <div id="banner" class="carousel slide" data-ride="carousel">
+    <div id="banner" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#banner" data-slide-to="0" class="active"></li>
                 <li data-target="#banner" data-slide-to="1"></li>
@@ -185,7 +185,7 @@ $select="";
             <a class="carousel-control-next" href="#banner" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </a>
-    </div> --}}
+    </div>
     
     {{-- 按鈕 --}}
     <div class="MainPageButtonAll">
