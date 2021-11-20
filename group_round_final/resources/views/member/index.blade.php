@@ -31,7 +31,9 @@
         </div>
         <hr className='hr_slid'>
         <div>
-            <a href="{{ route('member.Alter', $id) }}">修改個人資料</a>
+            @if($sessionId == $id)
+                <a href="{{ route('member.Alter') }}">修改個人資料</a>
+            @endif
         </div>
 
     
@@ -57,7 +59,7 @@
             @endforeach
             </div>
             <br><br>
-            <button type="button" class="btn btn-orange btn-sm"><a href="{{ route('member.create', $id) }}"  style="color: white">看更多</a></button>
+            <button type="button" class="btn btn-orange btn-sm"><a href="{{ route('member.create') }}"  style="color: white">看更多</a></button>
         </section>
         <hr class='hr_slid'>
         <section>
@@ -98,7 +100,7 @@
                 </a>
             </div>
             <br><br>
-            <button type="button" class="btn btn-orange btn-sm"><a href="{{ route('member.join', $id) }}" style="color: white">看更多</a></button>
+            <button type="button" class="btn btn-orange btn-sm"><a href="{{ route('member.join') }}" style="color: white">看更多</a></button>
         </section>
         <section>
             

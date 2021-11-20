@@ -4,20 +4,6 @@
     收藏的活動
 @endsection
 
-@section('aside')
-    {{-- 行事曆 --}}
-    <div id="root"></div>
-    {{-- 左選單 --}}
-    <div id="userContents">
-        <a href="{{ route('member.Alter', $id) }}"><h4>修改基本資料</h4></a>
-        <a href="{{ route('member.create', $id) }}"><h4>發起的活動</h4></a>
-        <a href="{{ route('member.join', $id) }}"><h4>參加的活動</h4></a>
-        <a href="{{ route('member.collect', $id) }}"><h4>收藏的活動</h4></a>
-        <a href="{{ route('member.finished', $id) }}"><h4>已結束的活動</h4></a>
-        <a href="{{ route('member.comment', $id) }}"><h4>團員回饋</h4></a>
-    </div>      
-@endsection
-
 @section('content')
     <section>
         <h2>收藏的活動</h2> 

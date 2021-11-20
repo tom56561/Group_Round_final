@@ -84,8 +84,13 @@
     <div class="container pt-5">
         <div class="d-flex justify-content-center align-items-center flex-row py-5 my-5">
             <div class="justify-content-center">
-                <h1 class="d-flex justify-content-center">建立成功！</h1>
-                <h4 class="d-flex justify-content-center">已建立新活動，按下確定查看吧！</h3>
+                @if (isset($id))
+                    <h1 class="d-flex justify-content-center">更新成功！</h1>
+                    <h4 class="d-flex justify-content-center">已更新活動，按下確定查看吧！</h3>
+                @else                    
+                    <h1 class="d-flex justify-content-center">建立成功！</h1>
+                    <h4 class="d-flex justify-content-center">已建立新活動，按下確定查看吧！</h3>
+                @endif
             </div>
 
 
@@ -93,7 +98,13 @@
 
         <!-- Button -->
         <div class="d-flex justify-content-center mb-2 py-4">
-            <form method="get" action="event/{{$last = DB::table('event') -> orderByDesc('eventId') -> first() ->eventId;}}" class="form-horizontal">
+            <form method="get"
+            @if (isset($id))  
+            action="/event/{{$id}}"
+            @else          
+            action="event/{{$last = DB::table('event') -> orderByDesc('eventId') -> first() ->eventId;}}" 
+            @endif
+            class="form-horizontal">
                 @csrf
                 <input class="px-3 btn btn-main" id="btn" type="submit" onclick="" value="確定" />
             </form>

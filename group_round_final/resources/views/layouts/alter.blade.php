@@ -67,9 +67,9 @@
                                 {{ __('會員中心') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.index', $user->userId) }} --}}">我的頁面</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.collect', $user->iserId) }} --}}">收藏的活動</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.Alter', $user->userId) }} --}}">修改資料</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.index', $user) }}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.collect', $user) }}">收藏的活動</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.Alter', $user) }}">修改資料</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">
                                     {{ __('登出') }}
@@ -86,7 +86,16 @@
     </header>
     
     <div id="leftDiv">
-        @yield('aside')        
+        {{-- 左選單 --}}
+        <div id="userContents">
+            <a href="{{ route('member.Alter') }}"><h4>修改基本資料</h4></a>
+            <a href="{{ route('member.create') }}"><h4>發起的活動</h4></a>
+            <a href="{{ route('member.join') }}"><h4>參加的活動</h4></a>
+            <a href="{{ route('member.collect') }}"><h4>收藏的活動</h4></a>
+            <a href="{{ route('member.finished') }}"><h4>已結束的活動</h4></a>
+            <a href="{{ route('member.comment') }}"><h4>團員回饋</h4></a>
+
+        </div>
     </div>
 
     <div id="rightDiv">
