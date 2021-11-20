@@ -103,9 +103,9 @@ Route::post('holdevent/store1', 'App\Http\Controllers\EventController@store1');
 Route::post('holdevent/store2', 'App\Http\Controllers\EventController@store2');
 Route::post('holdevent/store3', 'App\Http\Controllers\EventController@store3');
 //活動參加、取消、收藏
-Route::post('event/join/{id}', 'App\Http\Controllers\EventController@join');
-Route::post('event/cancel/{id}', 'App\Http\Controllers\EventController@cancel');
-Route::post('event/like/{id}', 'App\Http\Controllers\EventController@like');
+Route::post('event/join/{id}', 'App\Http\Controllers\EventController@join')->middleware('isLogged');
+Route::post('event/cancel/{id}', 'App\Http\Controllers\EventController@cancel')->middleware('isLogged');
+Route::post('event/like/{id}', 'App\Http\Controllers\EventController@like')->middleware('isLogged');
 //編輯活動（舉辦人)
 Route::get('edit1/{id}', 'App\Http\Controllers\EventController@editIndex1');
 Route::get('edit2/{id}', 'App\Http\Controllers\EventController@editIndex2');

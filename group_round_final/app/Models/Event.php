@@ -20,14 +20,12 @@ class Event extends Model
         return $this->hasOne('App\Models\TagList', 'tagId','eventTag2');
     }    
 
-    // function user() {
-    //     return $this->hasOne('App\Models\User', 'userId','userId');
-    // }
+    function user() {
+        return $this->hasOne('App\Models\User', 'userId','userId');
+    }
 
     function userRecord(){
         return $this->hasMany('App\Models\UserRecord', 'eventId', 'eventId');
     }
-    function user(){
-        return $this->belongsToMany(User::class, 'userrecord', 'eventId', 'userId');
-    }
+ 
 }
