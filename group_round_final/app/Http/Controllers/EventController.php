@@ -16,8 +16,6 @@ class EventController extends Controller
             $user = User::where('userId', session('LoggedUser'))->first()->userId;  //確認使用者是否登入，並取得userId
         }
         else{
-            $user = User::where('userId', session('LoggedUser'))->first()->userId;
-        }else{
             $user = 0;
         }
         $db = Event::find($id);
