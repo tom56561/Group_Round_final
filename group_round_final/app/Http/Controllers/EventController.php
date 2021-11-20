@@ -156,6 +156,7 @@ class EventController extends Controller
     }
     function editIndex4($id){
         return view('event.holdEventC4', compact('id'));
+<<<<<<< HEAD
     }
 
     function edit1(Request $request, $id)
@@ -189,6 +190,41 @@ class EventController extends Controller
         return redirect("edit4/$id");
     }
 
+=======
+    }
+
+    function edit1(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $event->eventTag = $request->array[0];
+        $event->eventTag2 = $request->array[1];
+        $result = $event->save();
+        return "success";
+    }
+    function edit2(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $imgName = $request->img->getClientOriginalName();  //取得照片名字
+        $request->img->move(public_path('eventImg'),  $imgName); //儲存照片路徑
+        $event->eventImg = $imgName;
+        $event->eventTitle = $request->title;
+        $event->eventContent = $request->content;
+        $event->save();
+        return redirect("edit3/$id");
+    }
+    function edit3(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $event->eventDateTime = $request->time;
+        $event->eventLocation = $request->location;
+        $event->peopleNumber = $request->people;
+        $event->eventCity = $request->city;
+        $event->userGender = $request->gender;
+        $event->save();
+        return redirect("edit4/$id");
+    }
+
+>>>>>>> e9d0d72fcb0be0e2cf46c1c93285b0df01678d96
     //參加活動
     function join(Request $request, $id)
     {
