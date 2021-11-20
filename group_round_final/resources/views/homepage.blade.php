@@ -151,28 +151,28 @@ $select="";
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-item active">
-                    <img src="https://picsum.photos/1200/200?random=5" class="d-block w-100" alt="picture1">
+                    <img src="{{ asset('img/banner01.jpg') }}" class="d-block w-100" alt="picture1">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>GROUP ROUND</h1>
                         <p>團團轉共遊平台</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://picsum.photos/1200/200?random=7" class="d-block w-100" alt="picture2">
+                    <img src="{{ asset('img/banner02.jpg') }}" class="d-block w-100" alt="picture2">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>GROUP ROUND</h1>
                         <p>團團轉共遊平台</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://picsum.photos/1200/200?random=9" class="d-block w-100" alt="picture3">
+                    <img src="{{ asset('img/banner03.jpg') }}" class="d-block w-100" alt="picture3">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>GROUP ROUND</h1>
                         <p>團團轉共遊平台</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://picsum.photos/1200/200?random=11" class="d-block w-100" alt="picture3">
+                    <img src="{{ asset('img/banner04.jpg') }}" class="d-block w-100" alt="picture3">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>GROUP ROUND</h1>
                         <p>團團轉共遊平台</p>
