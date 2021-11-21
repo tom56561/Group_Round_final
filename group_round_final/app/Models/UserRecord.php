@@ -13,7 +13,7 @@ class userRecord extends Model
     public $timestamps = false;
 
     function event() {
-        return $this->belongsTo('App\Models\Event');
+        return $this->belongsTo('App\Models\Event', 'eventId', 'eventId');
     } 
     function user() {
         return $this->hasOne('App\Models\User', 'userId','userId');
