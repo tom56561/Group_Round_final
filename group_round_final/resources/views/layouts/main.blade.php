@@ -77,6 +77,10 @@
             right: 15px;
             bottom: 15px;
         }
+        .popDiv .close{
+            text-align: right;
+        }
+        
         /* 刪除會員資料時顯示 */
         #deleteCheck button{
             margin: -20px 10px 0 10px;
@@ -222,9 +226,9 @@
                                 {{ __('會員中心') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.index', $user->userId) }} --}}">我的頁面</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.collect', $user->iserId) }} --}}">收藏的活動</a></li>
-                                <li><a class="dropdown-item" href="{{-- {{ route('member.Alter', $user->userId) }} --}}">修改資料</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.index', $id) }}">我的頁面</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.collect') }}">收藏的活動</a></li>
+                                <li><a class="dropdown-item" href="{{ route('member.Alter') }}">修改資料</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">
                                     {{ __('登出') }}

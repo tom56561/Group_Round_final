@@ -24,7 +24,6 @@ Route::get('/', [HomepageController::class, 'user_identity'])->name('home');
 Route::get('login', [UserAuthController::class, 'login'])->name('login')->middleware('alreadyLoggedIn'); // alreadyLoggedIn是防止在已登入狀態下看到登入和註冊頁面
 Route::get('register', [UserAuthController::class, 'register'])->middleware('alreadyLoggedIn');
 Route::post('create', [UserAuthController::class, 'create'])->name('auth.create'); // 與註冊頁面的form action相同
-// Route::get('register/succsee', [UserAuthController::class, 'success']); 註冊後跳轉
 Route::post('check', [UserAuthController::class, 'check'])->name('auth.check');
 
 // profile相關換成小馬的member
@@ -35,14 +34,14 @@ Route::get('logout', [UserAuthController::class, 'logout'])->name('logout');
 //   ------------
 // member
 Route::get('/member/{id}', "App\Http\Controllers\MemberController@index")->name( 'member.index' );
-Route::get('/memberF1/{id}', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF2/{id}', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF3/{id}', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF4/{id}', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF6/{id}', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF1', "App\Http\Controllers\MemberController@joinEvent")->name( 'member.join' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF2', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF3', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF4', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::get('/memberF6', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged')->middleware('alreadyLoggedIn');
 
 // 修改會員資料
-Route::get('/memberF5/{id}', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
+Route::get('/memberF5', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
 Route::resource('/MemberAlter', 'App\Http\Controllers\MemberAlterController');
 //   ------------
 // serch
@@ -104,9 +103,9 @@ Route::post('holdevent/store1', 'App\Http\Controllers\EventController@store1');
 Route::post('holdevent/store2', 'App\Http\Controllers\EventController@store2');
 Route::post('holdevent/store3', 'App\Http\Controllers\EventController@store3');
 //活動參加、取消、收藏
-Route::post('event/join/{id}', 'App\Http\Controllers\EventController@join');
-Route::post('event/cancel/{id}', 'App\Http\Controllers\EventController@cancel');
-Route::post('event/like/{id}', 'App\Http\Controllers\EventController@like');
+Route::post('event/join/{id}', 'App\Http\Controllers\EventController@join')->middleware('isLogged');
+Route::post('event/cancel/{id}', 'App\Http\Controllers\EventController@cancel')->middleware('isLogged');
+Route::post('event/like/{id}', 'App\Http\Controllers\EventController@like')->middleware('isLogged');
 //編輯活動（舉辦人)
 Route::get('edit1/{id}', 'App\Http\Controllers\EventController@editIndex1');
 Route::get('edit2/{id}', 'App\Http\Controllers\EventController@editIndex2');

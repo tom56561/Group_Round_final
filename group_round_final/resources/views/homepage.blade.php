@@ -132,11 +132,11 @@ $select="";
     </header>
     <body style="background-color:  #f6f7f8;">
     {{-- 原bnner --}}
-    <div class="MainPageBanner">
+    {{-- <div class="MainPageBanner">
         <img src="../img/mainpagepic1.png" id="MainPagePicture" style="width: 100%;">
-    </div>
+    </div> --}}
     {{-- 幻燈片 --}}
-    {{-- <div id="banner" class="carousel slide" data-ride="carousel">
+    <div id="banner" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#banner" data-slide-to="0" class="active"></li>
                 <li data-target="#banner" data-slide-to="1"></li>
@@ -151,28 +151,28 @@ $select="";
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-item active">
-                    <img src="https://picsum.photos/1200/200?random=5" class="d-block w-100" alt="picture1">
+                    <img src="{{ asset('img/banner01.jpg') }}" class="d-block w-100" alt="picture1">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>GROUP ROUND</h1>
                         <p>團團轉共遊平台</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://picsum.photos/1200/200?random=7" class="d-block w-100" alt="picture2">
+                    <img src="{{ asset('img/banner02.jpg') }}" class="d-block w-100" alt="picture2">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>GROUP ROUND</h1>
                         <p>團團轉共遊平台</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://picsum.photos/1200/200?random=9" class="d-block w-100" alt="picture3">
+                    <img src="{{ asset('img/banner03.jpg') }}" class="d-block w-100" alt="picture3">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>GROUP ROUND</h1>
                         <p>團團轉共遊平台</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://picsum.photos/1200/200?random=11" class="d-block w-100" alt="picture3">
+                    <img src="{{ asset('img/banner04.jpg') }}" class="d-block w-100" alt="picture3">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>GROUP ROUND</h1>
                         <p>團團轉共遊平台</p>
@@ -185,7 +185,7 @@ $select="";
             <a class="carousel-control-next" href="#banner" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </a>
-    </div> --}}
+    </div>
     
     {{-- 按鈕 --}}
     <div class="MainPageButtonAll">

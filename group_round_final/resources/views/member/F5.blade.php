@@ -36,13 +36,12 @@
                
 
                  <div id="userContents">
-                    {{-- <a href="/memberF5/{{ $id }}"><h4>修改基本資料</h4></a> --}}
-                    <a href="{{ route('member.Alter', $id) }}"><h4>修改基本資料</h4></a>
-                    <a href="{{ route('member.create', $id) }}"><h4>發起的活動</h4></a>
-                    <a href="{{ route('member.join', $id) }}"><h4>參加的活動</h4></a>
-                    <a href="{{ route('member.collect', $id) }}"><h4>收藏的活動</h4></a>
-                    <a href="{{ route('member.finished', $id) }}"><h4>已結束的活動</h4></a>
-                    <a href="{{ route('member.comment', $id) }}"><h4>團員回饋</h4></a>
+                    <a href="{{ route('member.Alter') }}"><h4>修改基本資料</h4></a>
+                    <a href="{{ route('member.create') }}"><h4>發起的活動</h4></a>
+                    <a href="{{ route('member.join') }}"><h4>參加的活動</h4></a>
+                    <a href="{{ route('member.collect') }}"><h4>收藏的活動</h4></a>
+                    <a href="{{ route('member.finished') }}"><h4>已結束的活動</h4></a>
+                    <a href="{{ route('member.comment') }}"><h4>團員回饋</h4></a>
                         
                 </div>   
 
@@ -64,7 +63,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;碼</span>
-                            <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="*********" value="{{ $User->userPassword }}" maxlength="20" name="userPassword" pattern="(?=.*\d).{8,}">
+                            <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="*********" value="" maxlength="20" name="userPassword" pattern="(?=.*\d).{8,}">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">電子信箱</span>
@@ -103,15 +102,17 @@
                             @endif
                         @endforeach
                         </div>
-                        
                         {{-- 觸發彈出視窗 --}}
                         <a id="addInterest" onclick="popDiv();" class="col-3">+</a>
-                                              
-                        
                     </div>
 
-                    <!-- 彈出視窗 -->
+                   {{-- 彈出視窗 --}}
                     <div id="popDiv" class="popDiv">
+                        
+                        <div class="close">
+                            <button type="button" onclick="closePop()" class="btn btn-danger btn-sm">X</button>
+                        </div>
+
                         {{-- 選擇興趣 --}}
                         <div class="row" id="pickDiv">
                             @foreach ($tagList as $tag)
@@ -121,13 +122,12 @@
                             </label>
                             @endforeach 
                         </div>
-                        {{-- 確認修改 --}}
+                        
                         <div class="sendPick">
-                            <button type="button" onclick="closePop()" class="btn btn-orange">確認修改</button>
+                            <button type="button" onclick="sendPop()" class="btn btn-orange">確認修改</button>
                         </div>
 
                     </div>
-
                 </section>
                 <div id="submitBtn" class="d-grid gap-2" style="text-align: center;">
                     {{-- 送出表單 --}}
@@ -135,7 +135,6 @@
                         <span>修改送出</span>                        
                     </button>
                 </div>
-                
             </div>
         </form>
         <div id="rightDiv" class="userDelete">
@@ -146,9 +145,9 @@
                 <a name="userDelete" style="font-size: 12px;" onclick="userDeleteData()">刪除會員資料</a>
                 <input type="hidden" id="userId" name="userId" value="{{ $id }}">
 
+                {{-- 彈出視窗 --}}
                 <div id="wornningPop" class="popDiv">
                     <p>確定要刪除資料？</p>
-                    {{-- 確認修改 --}}
                     <div id="deleteCheck">
                         <button type="button" onclick="popClose()" class="btn btn-success">返回</button>
                         <button type="submit" name="dataDelete" onclick="popClose()" class="btn btn-danger">確認</button>
@@ -193,15 +192,23 @@
         };
         
 
-        // 彈出視窗
+        // 選擇興趣彈出視窗
         function popDiv() {
             var popBox = document.getElementById("popDiv");
             var intCover = document.getElementById("intCover");
             popBox.style.display = "block";
             intCover.style.display = "block"; 
         };
+
+        // 關閉視窗
         function closePop() {
-            // 關閉視窗
+            let popDiv = document.getElementById("popDiv");
+            var i_Cover = document.getElementById("intCover");
+            popDiv.style.display = "none";
+            i_Cover.style.display = "none";
+        }
+        // 興趣確認送出
+        function sendPop() {
             let popDiv = document.getElementById("popDiv");
             var i_Cover = document.getElementById("intCover");
             popDiv.style.display = "none";
@@ -215,7 +222,6 @@
                     value.push(id[i].value);
                 }
             }
-            // alert(value);
             // 預覽興趣
             var msg = '';
             value.forEach(e);
@@ -225,11 +231,11 @@
             }
         };
 
-        var maxChoices = 5;
-        var flag = 0;
         
+        // 限制選擇興趣的數量
         function onCheckBox(checkbox) {
-            // 限制checkbox數量
+            var maxChoices = 5;
+            var flag = 0;
             var items = document.getElementsByName("tagCheckbox[]");
             if (checkbox.checked) {
                 flag++;

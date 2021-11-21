@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Citylist;
-use App\Models\User_1;
+use App\Models\User;
 use App\Models\TagList;
+use Illuminate\Support\Facades\Hash;
 
 class MemberAlterController extends Controller
 {
@@ -14,15 +15,17 @@ class MemberAlterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $User = User_1::find($id);
-        $cityList = Citylist::all();
-        $tagList = TagList::all();
-        // dd($User->interestTag);
-        $tag = mb_split(',', $User->interestTag); // 字串轉換成陣列
-        // dd($tag);
-
+        if(session()->has('LoggedUser')){
+            $id = User::where('userId', session('LoggedUser'))->first()->userId;
+            $User = User::find($id);
+            $cityList = Citylist::all();
+            $tagList = TagList::all();
+            // dd($User->interestTag);
+            $tag = mb_split(',', $User->interestTag); // 字串轉換成陣列
+            // dd($tag);
+        }
         return View ('member.f5', compact('User', 'cityList', 'tagList', 'id', 'tag'));
     }
 
@@ -78,7 +81,7 @@ class MemberAlterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $User = User_1::find($id);
+        $User = User::find($id);
         $tagCheckbox = $request->input('tagCheckbox');   // 接收興趣input
         
         // 判斷是否有選擇興趣
@@ -99,18 +102,25 @@ class MemberAlterController extends Controller
             $User->userImg = $User->userImg;
         }
 
+        //判斷是否修改密碼
+        if (isset($request->userPassword)) {           
+            $User->userPassword = Hash::make($request->userPassword);
+        } else {
+            $User->userPassword = $User->userPassword;
+        }
+
         $User->cityId = $request->userCity;
         $User->userName = $request->userName;       
         $User->userEmail = $request->userEmail;       
         $User->userIntro = $request->userIntro;
         $User->userNickName = $request->userNickName;
-        $User->userPassword = $request->userPassword;       
         $User->userBirthday = $request->userBirthday;       
         $User->save();
         
         return back()->with('notice', '會員資料更新成功！');
         
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -120,7 +130,7 @@ class MemberAlterController extends Controller
      */
     public function destroy($id)
     {
-        $User = User_1::find($id);
+        $User = User::find($id);
         $User->delete();
         return redirect()->route('home')->with('notice', '會員資料已刪除請重新登入');
     }
