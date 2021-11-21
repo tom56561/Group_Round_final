@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="{{URL::asset('css/member_comment.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/member_interest.css')}}">
 
+    <style>
+        /* *{outline: 1px solid #000;} */
+    </style>
+
 </head>
 <body>
     {{-- 頁首 --}}

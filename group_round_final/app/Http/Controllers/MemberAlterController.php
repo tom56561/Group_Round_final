@@ -18,7 +18,7 @@ class MemberAlterController extends Controller
     public function index()
     {
         if(session()->has('LoggedUser')){
-            $id = User::where('userId', session('LoggedUser'))->first()->userId;
+            $id = session()->get('LoggedUser');
             $User = User::find($id);
             $cityList = Citylist::all();
             $tagList = TagList::all();
@@ -132,6 +132,10 @@ class MemberAlterController extends Controller
     {
         $User = User::find($id);
         $User->delete();
+        // 登出
+        if(session()->has('LoggedUser')){
+            session()->pull('LoggedUser');
+        }
         return redirect()->route('home')->with('notice', '會員資料已刪除請重新登入');
     }
 }

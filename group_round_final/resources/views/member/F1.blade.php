@@ -7,26 +7,31 @@
 @section('content')
     <section>
         <h2>參加的活動</h2>
-        
-        <div class="AllCard">
-            {{-- @foreach ($joinEvent as $join)
-                <a href="#">
-                    <div class="card" id="card1">
-                        <img src="/img/{{  }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            
-                            <p class="card-text">一起來玩瘟疫危機！</p>
+        @if (sizeof($userJoin) == 0)
+            <div style="height: 300px; padding-top:100px;text-align: center;">
+                <h3 style="color:gray;">尚未參加活動</h3>
+            </div>
+        @else
+            <div class="AllCard">
+                @foreach ($userJoin as $join)
+                    <a href="#">
+                        <div class="card" id="card1">
+                            <img src="/img/{{ $join->event->eventImg }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+
+                                <p class="card-text">{{ $join->event->eventTitle }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">{{ date('m月d日 H:i',strtotime($join->event->eventDateTime)) }}</small>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <small class="text-muted">10月24日 19:00</small>
-                        </div>
-                    </div>
-                </a>
-            @endforeach --}}
-            
-           
-        </div>  
-        <button id="submitBtn" class="btn btn-orange">看更多</button>
+                    </a>
+                @endforeach
+            </div>
+        @endif
     </section>
+    <br>
+    <br>
+    <br>
     
 @endsection

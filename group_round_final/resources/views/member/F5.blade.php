@@ -233,9 +233,9 @@
 
         
         // 限制選擇興趣的數量
+        var maxChoices = 5;
+        var flag = 0;
         function onCheckBox(checkbox) {
-            var maxChoices = 5;
-            var flag = 0;
             var items = document.getElementsByName("tagCheckbox[]");
             if (checkbox.checked) {
                 flag++;

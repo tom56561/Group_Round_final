@@ -12,7 +12,4 @@ class TagList extends Model
     protected $primaryKey = 'tagId';
     public $timestamps = false;
 
-    function user() {
-        return $this->belongsToMany(User_1::class, 'tagList_user');
-    }
 }

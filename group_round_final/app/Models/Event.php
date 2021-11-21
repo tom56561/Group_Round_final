@@ -13,8 +13,8 @@ class Event extends Model
     public $timestamps = false;
 
     function tagList1() {
-        return $this->hasOne('App\Models\TagList', 'tagId','eventTag');
-    }    
+        return $this->hasOne('App\Models\TagList', 'tagId', 'eventTag');
+    }                          
 
     function tagList2() {
         return $this->hasOne('App\Models\TagList', 'tagId','eventTag2');
@@ -27,5 +27,5 @@ class Event extends Model
     function userRecord(){
         return $this->hasMany('App\Models\UserRecord', 'eventId', 'eventId');
     }
- 
+    
 }
