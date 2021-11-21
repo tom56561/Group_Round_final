@@ -18,6 +18,7 @@ class EventController extends Controller
             $user = 0;
         }
         
+        
         $db = Event::find($id);
         // $db = DB::table('event')->where('eventId','=',$id);
         $eventTitle = $db -> eventTitle;
