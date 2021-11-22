@@ -26,8 +26,6 @@
           $('img',this).toggle();
           $(this).find("img:first").toggleClass("selected");
        })
-
-        
     })
 
     //創建活動
@@ -38,13 +36,14 @@
             a[i] = $(this).attr('id')
             i++;
         });
-
         $.ajax({          //ajax傳送到後端
             type: "POST",
             url: "/holdevent/store1",
-            data: {'array':a,'_token':'{{csrf_token()}}'},
+            datatype:"json",
+            data: {'array1':a[0],'array2':a[1],'_token':'{{csrf_token()}}'},
             success: function(test){
-             window.location.href="holdevent2";}
+             window.location.href="holdevent2";
+             }
         });
     }
 
@@ -59,11 +58,11 @@
 
         $.ajax({          //ajax傳送到後端
             type: "POST",
-            url: "/edit/store1/{{$id}}",
-            data: {'array':a,'_token':'{{csrf_token()}}'},
+            url: "/edit/store1/{{$id ?? ''}}",
+            data: {'array1':a[0],'array2':a[1],'_token':'{{csrf_token()}}'},
             success: function(test){
             console.log("success");
-             window.location.href="/edit2/{{$id}}"}
+             window.location.href="/edit2/{{$id ?? ''}}"}
         });
     }
     
