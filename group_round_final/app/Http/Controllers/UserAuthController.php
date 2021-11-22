@@ -126,7 +126,7 @@ class UserAuthController extends Controller
                 'LoggedUserInfo'=>$user
             ];
         }
-        return view('member/profile', $data);
+        return view('homepage', $data);
         // return redirect()->intended('member/index', $data);
         // return back()->with('success','登入成功');
     }

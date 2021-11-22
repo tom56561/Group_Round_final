@@ -117,7 +117,7 @@
                     </a>
                 </div>
                 <div class="ps-3">
-                    <span class="d-block">舉辦人</span>
+                    <span class="d-block">團長</span>
                     <span class="fw-bold">{{$userName}}</span>
                 </div>
             </div>

@@ -14,10 +14,11 @@ class EventController extends Controller
     function index($id) {   //活動頁面
         if(session()->has('LoggedUser')){
             $user = User::where('userId', session('LoggedUser'))->first()->userId;  //確認使用者是否登入，並取得userId
-        }
-        else{
+        }else{
             $user = 0;
         }
+        
+        
         $db = Event::find($id);
         // $db = DB::table('event')->where('eventId','=',$id);
         $eventTitle = $db -> eventTitle;
