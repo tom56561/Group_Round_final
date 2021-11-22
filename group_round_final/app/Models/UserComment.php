@@ -11,12 +11,9 @@ class UserComment extends Model
     protected $table = "usercomment";
     // protected $foreignKey = 'eventId';
     public $timestamps = false;
-
     function event() {
-        return $this->belongsTo(Event::class, 'eventId'); 
-    }
-        
+        return $this->belongsTo(Event::class, 'eventId'); }
     function user() {
-        return $this->belongsTo(User::class, 'userId'); 
-    }
+        return $this->belongsTo(User::class, 'userIdJion'); 
+}
 }

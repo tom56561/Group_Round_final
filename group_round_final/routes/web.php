@@ -117,6 +117,6 @@ Route::post('edit/store3/{id}', 'App\Http\Controllers\EventController@edit3');
 
 //   ------------
 // feedback
-Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')->middleware('isLogged');
-Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index')->middleware('isLogged');
-// Route::post('', 'App\Http\Controllers\FeedbackController@store');
+Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1');/*->middleware('isLogged');*/
+Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index');/*->middleware('isLogged');*/
+Route::post('memberCommentF6', 'App\Http\Controllers\FeedbackController@store');/*->middleware('isLogged');*/

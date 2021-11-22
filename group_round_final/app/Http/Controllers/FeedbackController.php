@@ -22,7 +22,7 @@ class FeedbackController extends Controller
         // return view('會員中心.web.memberCommentF6',compact('usercomment'));
         $usercom = UserComment::all();
         // $city = CityList::all();
-        return view('feedback/memberCommentF6', compact('usercom'));
+        return view('feedback.memberCommentF6', compact('usercom'));
       
         // return view('employees.index', compact('employeeList'));
     }
@@ -34,7 +34,7 @@ class FeedbackController extends Controller
         // return view('會員中心.web.memberCommentF6',compact('usercomment'));
         // $usercom = UserComment::all();
         // $city = CityList::all();
-        return view('feedback/html.actFeed_____E');
+        return view('feedback/actFeed_____E');
       
         // return view('employees.index', compact('employeeList'));
     }
@@ -50,10 +50,12 @@ class FeedbackController extends Controller
     {
         $usecom = new usercomment();
         $usecom->feedback = $request->comment;
-        $usecom->userId =1;
-        $usecom->eventId = 1;
+        $usecom->userIdHold =1;
+        $usecom->eventId =2;
         $usecom->rate = $request->rate;
+        $usecom->userIdJion = 2;
         
+ 
         $usecom->save();
         
         // $user = new user();
@@ -82,7 +84,7 @@ class FeedbackController extends Controller
         // $eve->eventTag = $request->eventTag;
         // $eve->save();
         
-        return redirect("/");
+        return redirect("memberCommentF6");
     }
     
     // public function show(Employee $employee)
