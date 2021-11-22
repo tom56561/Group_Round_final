@@ -272,7 +272,7 @@ $select="";
               "     
                     <a href='/event/".$result['eventId']."' target='_blank'>
                     <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
-                     <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;'  alt='...'>
+                     <img src='../eventImg/".$result['eventImg']."' class='card-img-top' style='height: 33vh;'  alt='...'>
                      <div class='card-body'>
                         <h4 class='card-text'>".$result['eventTitle']."</h4>
                      </div>
@@ -319,7 +319,7 @@ $select="";
               "      
                     <a href='/event/".$result['eventId']."' target='_blank'>
                      <div class='card' id='card1'  style='width:24vw;display:inline-flex'>
-                     <img src='../img/".$result['eventImg']."' class='card-img-top' style='height: 33vh;' alt='...'>
+                     <img src='../eventImg/".$result['eventImg']."' class='card-img-top' style='height: 33vh;' alt='...'>
                      <div class='card-body'>
                         <h4 class='card-text'>".$result['eventTitle']."</h4>
                      </div>
