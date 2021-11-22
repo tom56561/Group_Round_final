@@ -87,11 +87,11 @@ class EventController extends Controller
         }
         $event = new Event();
         $event->userId = $user;
-        $event->eventTag = $request->array[0];
-        $event->eventTag2 = $request->array[1];
+        $event->eventTag = $request->array1;
+        $event->eventTag2 = $request->array2;
         $result = $event->save();
-        // $event -> create($request -> all()); 
-        return "holdevent2";
+        // $event -> create($request -> all()); 另一種做法
+        return 'holdevent2';
     }
 
     function store2(Request $request)
@@ -161,8 +161,8 @@ class EventController extends Controller
     function edit1(Request $request, $id)
     {
         $event = Event::find($id);
-        $event->eventTag = $request->array[0];
-        $event->eventTag2 = $request->array[1];
+        $event->eventTag = $request->array1;
+        $event->eventTag2 = $request->array2;
         $result = $event->save();
         return "success";
     }

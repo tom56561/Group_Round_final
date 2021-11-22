@@ -277,10 +277,8 @@
                     <span class="fw-light fw-6">{{$eventDateTime2}} 星期{{$weekday}}</span>
                 </div>
                 <div>
- 
-
-                    
-                    <span><img src="/resources/img/share.svg" alt=""></span>
+                
+                    {{-- <span><img src="/resources/img/share.svg" alt=""></span> --}}
                         {{-- 判斷使用者是否收藏活動 --}}
                     @if ($userLike->where('userId', '=',$user)->first()===null)                        
                         <span id='like' class="like align-middle px-3">&#9733;</span>
@@ -288,23 +286,31 @@
                         <span id='like' class="like cs align-middle px-3">&#9733;</span>
                     @endif
 
-                        {{-- 判斷使用者是否舉舉辦者 --}}
-                    @if ($holduser === $user)
+                    {{-- 判斷活動是否已結束 --}}
+                    @if (date('Y年m月d日')>$eventDateTime)
                         <form method="get" action="/edit1/{{$id}}" enctype="multipart/form-data" class="d-inline">
                             @csrf
-                        <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="編輯活動" />
-                        </form>
-                        {{-- 判斷使用者是否加入會員 --}}
-                    @elseif ($userJoin->where('userId', '=',$user)->first()===null)  
-                        <form method="post" action="/event/join/{{$id}}" enctype="multipart/form-data" class="d-inline">
-                            @csrf
-                        <input class="px-3 btn btn-orange " id="btn" type="submit" onclick="" value="參加活動" />
+                        <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="評價回饋" />
                         </form>
                     @else
-                        <form method="post" action="/event/cancel/{{$id}}" enctype="multipart/form-data" class="d-inline">
-                            @csrf
-                        <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="取消活動" />
-                        </form>
+                        {{-- 判斷使用者是否舉舉辦者 --}}
+                        @if ($holduser === $user)
+                            <form method="get" action="/edit1/{{$id}}" enctype="multipart/form-data" class="d-inline">
+                                @csrf
+                            <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="編輯活動" />
+                            </form>
+                        {{-- 判斷使用者是否加入會員 --}}
+                        @elseif ($userJoin->where('userId', '=',$user)->first()===null)  
+                            <form method="post" action="/event/join/{{$id}}" enctype="multipart/form-data" class="d-inline">
+                                @csrf
+                            <input class="px-3 btn btn-orange " id="btn" type="submit" onclick="" value="參加活動" />
+                            </form>
+                        @else
+                            <form method="post" action="/event/cancel/{{$id}}" enctype="multipart/form-data" class="d-inline">
+                                @csrf
+                            <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="取消活動" />
+                            </form>
+                        @endif
                     @endif
 
 
