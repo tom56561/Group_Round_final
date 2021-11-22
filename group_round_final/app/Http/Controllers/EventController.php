@@ -18,16 +18,15 @@ class EventController extends Controller
             $user = 0;
         }
         
-        
+        //取得資料庫資料
         $db = Event::find($id);
-        // $db = DB::table('event')->where('eventId','=',$id);
         $eventTitle = $db -> eventTitle;
         $eventContent = $db -> eventContent;
         $eventImg = $db -> eventImg;
         $DateTime = $db -> eventDateTime;
-        $eventDateTime =  date('Y年m月d日',strtotime($DateTime));
-        $eventDateTime1 =  date('H時i分',strtotime($DateTime));
-        $eventDateTime2 =  date('m月d日 H:i',strtotime($DateTime));
+        $eventDateTime =  date('Y年m月d日',strtotime($DateTime)); //將dateime轉為固定格式
+        $eventDateTime1 =  date('H時i分',strtotime($DateTime));  //將dateime轉為固定格式
+        $eventDateTime2 =  date('m月d日 H:i',strtotime($DateTime)); //將dateime轉為固定格式
         $weekarray=array("日","一","二","三","四","五","六");
         $weekday = $weekarray[date("w",strtotime($DateTime))];
         $eventCity = $db -> eventCity;
@@ -42,7 +41,7 @@ class EventController extends Controller
         $userJoin = $db -> userRecord->where('type','join'); //外鍵一對多
         $userLike = $db -> userRecord->where('type','like'); //外鍵一對多
 
-
+        //compact打包多個變數
         $viewModel = compact(
             "eventTitle", 
             "eventContent", 
@@ -139,7 +138,7 @@ class EventController extends Controller
     function editIndex3($id){
         $event = Event::find($id);
         $DateTime = $event -> eventDateTime;
-        $eventDateTime =  date('Y-m-d\TH:i',strtotime($DateTime));
+        $eventDateTime =  date('Y-m-d\TH:i',strtotime($DateTime)); //將dateime轉為固定格式
         $eventCity = $event -> eventCity;
         $eventLocation = $event -> eventLocation;
         $peopleNumber = $event -> peopleNumber;
