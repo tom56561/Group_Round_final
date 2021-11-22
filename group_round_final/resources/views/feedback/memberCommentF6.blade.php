@@ -151,7 +151,7 @@
                             <!-- 小明、小華、小美 -->
                         </div>
                         <div class="col" id="toppicImg">
-                            <img src="{{$uscom->event["eventImg"]}}" alt="" style="width: 300px;">
+                            <img src="{{asset('/img/'.$uscom->event["eventImg"])}}" alt="" style="width: 300px;">
                             <!-- ../img/陽明山.jpg -->
                         </div>
                         
@@ -160,7 +160,7 @@
                     <div id="commentContent" class="row">
 
                         <div class="col-3"id="commentImg">
-                            <img src="{{$uscom->user["userImg"]}}" alt="" style="width: 100px;">
+                            <img src="{{asset('/upload/'.$uscom->user["userImg"])}}" alt="" style="width: 100px;">
                         </div>
                         
                         <div class="col-9 row" >
