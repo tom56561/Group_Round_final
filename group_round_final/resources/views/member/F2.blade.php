@@ -7,8 +7,8 @@
 
 @section('content')
     <section>
-        <h2>發起的活動</h2> 
-
+        <h2>發起的活動</h2>
+        
         @if (sizeof($createEvent) == 0)
             <div style="height: 300px; padding-top:100px;text-align: center;">
                 <h3 style="color:gray;">尚未發起活動</h3>
@@ -16,9 +16,11 @@
         @else
             <div class="AllCard">
                 @foreach ($createEvent as $create)                
-                    <a href="#">
-                        <div class="card" id="card1">
-                            <img src="#" class="card-img-top" alt="{{ $create->eventImg }}">
+                    <a href="/event/{{ $create->eventId }}">
+                        <div class="card" id="card">
+                            <div id="cardImg">
+                                <img src="/img/{{ $create->eventImg }}" class="card-img-top" alt="">
+                            </div>
                             <div class="card-body">
                                 <p class="card-text">{{ $create->eventTitle }}</p>
                             </div>

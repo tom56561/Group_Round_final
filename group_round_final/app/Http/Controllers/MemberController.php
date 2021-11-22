@@ -20,7 +20,18 @@ class MemberController extends Controller
         $userJoin = userRecord::where('userId', $id)->where('type', 'join')->get(); // 參加的活動
         $tag = mb_split(',', $User->interestTag); // 字串轉換成陣列
         $userComment = UserComment::where('userIdHold', $id)->get(); // 活動得到的回饋
-
+        // 計算會員評價
+        $rateTotal = 0;
+        foreach ($userComment as $key => $value) {
+            $rateTotal += $value->rate;
+        }
+        
+        // 如果尚未獲得評價
+        if ($rateTotal == 0) {
+            $userRate = $rateTotal;
+        } else {
+            $userRate = $rateTotal % $key+1;
+        }
         
         $cityList = Citylist::all();
         $tagList = TagList::all();
@@ -28,7 +39,8 @@ class MemberController extends Controller
         return View ('member.index', compact(
             'User', 'cityList', 'tagList',
             'id', 'createEvent', 'tag',
-            'sessionId', 'userJoin', 'userComment'
+            'sessionId', 'userJoin', 'userComment',
+            'userRate'
         ));
     }
 
@@ -54,10 +66,20 @@ class MemberController extends Controller
     // 已結束的活動
     function finishedEvent() {
         if(session()->has('LoggedUser')){
-            $id = session()->get('LoggedUser');
+            $id = session()->get('LoggedUser');            
+            $userJoin = userRecord::where('userId', $id)->where('type', 'join')->get();
+            $allFinish = Event::where('deleted_at', null)->get();
+            // 標示已結束活動
+            foreach ($allFinish as $allFinish) {
+                if ($allFinish->eventDateTime < date('Y-m-d H:i:s')) {
+                    $allFinish->deleted_at = date('Y-m-d H:i:s');
+                    $allFinish->save();
+                }
+            }
+            
             
         }
-        return view("member.F3", compact('id'));
+        return view("member.F3", compact('id', 'userJoin'));
     }
     
     // 收藏的活動

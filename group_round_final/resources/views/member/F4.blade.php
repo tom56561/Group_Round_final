@@ -14,9 +14,11 @@
         @else
             <div class="AllCard">
                 @foreach ($userLike as $like)
-                    <a href="#">
-                        <div class="card" id="card1">
-                            <img src="/img/{{ $like->event->eventImg }}" class="card-img-top" alt="...">
+                    <a href="/event/{{ $like->event->eventId }}">
+                        <div class="card" id="card">
+                            <div id="cardImg">
+                                <img src="/img/{{ $like->event->eventImg }}" class="card-img-top" alt="...">
+                            </div>
                             <div class="card-body">
 
                                 <p class="card-text">{{ $like->event->eventTitle }}</p>
