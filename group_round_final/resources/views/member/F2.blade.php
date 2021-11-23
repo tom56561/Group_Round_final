@@ -14,7 +14,7 @@
         </div>
         @else
         
-        <div class="AllCard">
+        <div class="AllCard" style="margin-bottom: 220px">
             @foreach ($createEvent as $create)                
 
                     <a href="/event/{{ $create->eventId }}">
