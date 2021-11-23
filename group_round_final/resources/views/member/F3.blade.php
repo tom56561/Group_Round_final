@@ -12,7 +12,7 @@
                 <h3 style="color:gray;">尚無已結束活動</h3>
             </div>
         @else
-            <div class="AllCard">
+            <div class="AllCard" style="margin-bottom: 220px">
                 @foreach ($userJoin as $join)
                     @if ($join->event->deleted_at !== null)
                         <a href="/event/{{ $join->event->eventId }}">
