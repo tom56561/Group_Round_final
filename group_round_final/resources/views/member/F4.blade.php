@@ -12,7 +12,7 @@
                 <h3 style="color:gray;">尚未收藏活動</h3>
             </div>
         @else
-            <div class="AllCard">
+            <div class="AllCard" style="margin-bottom: 220px">
                 @foreach ($userLike as $like)
                     <a href="/event/{{ $like->event->eventId }}">
                         <div class="card" id="card">
