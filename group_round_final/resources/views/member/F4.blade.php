@@ -17,7 +17,7 @@
                     <a href="/event/{{ $like->event->eventId }}">
                         <div class="card" id="card">
                             <div id="cardImg">
-                                <img src="/img/{{ $like->event->eventImg }}" class="card-img-top" alt="...">
+                                <img src="/eventImg/{{ $like->event->eventImg }}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
 

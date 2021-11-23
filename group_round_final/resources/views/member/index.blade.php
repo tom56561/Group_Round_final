@@ -57,7 +57,7 @@
                             <a href="/event/{{ $value->eventId }}">
                                 <div class="card" id="card">
                                     <div id="cardImg">
-                                        <img src="/img/{{ $value->eventImg }}" class="card-img-top" alt="">
+                                        <img src="/eventImg/{{ $value->eventImg }}" class="card-img-top" alt="">
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">{{ $value->eventTitle }}</p>
@@ -91,7 +91,7 @@
                         <a href="/event/{{ $value->event->eventId }}">
                             <div class="card" id="card">
                                 <div id="cardImg">
-                                    <img src="/img/{{ $value->event->eventImg }}" class="card-img-top" alt="...">
+                                    <img src="/eventImg/{{ $value->event->eventImg }}" class="card-img-top" alt="...">
                                 </div>
                                 <div class="card-body">
 

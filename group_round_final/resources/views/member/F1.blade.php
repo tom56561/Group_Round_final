@@ -18,7 +18,7 @@
                         <a href="/event/{{ $join->event->eventId }}">
                             <div class="card" id="card">
                                 <div id="cardImg">
-                                    <img src="/img/{{ $join->event->eventImg }}" class="card-img-top" alt="...">
+                                    <img src="/eventImg/{{ $join->event->eventImg }}" class="card-img-top" alt="...">
                                 </div>
 
                                 <div class="card-body">

@@ -16,13 +16,16 @@ class FeedbackController extends Controller
 
     public function index()
     {
-
+        if(session()->has('LoggedUser')){
+            $id = session()->get('LoggedUser');
+        }
+        
 
         // $usercomment = usercomment::all();
         // return view('會員中心.web.memberCommentF6',compact('usercomment'));
         $usercom = UserComment::all();
         // $city = CityList::all();
-        return view('feedback.memberCommentF6', compact('usercom'));
+        return view('feedback.memberCommentF6', compact('usercom', 'id'));
       
         // return view('employees.index', compact('employeeList'));
     }
