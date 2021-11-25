@@ -43,6 +43,15 @@
     </style>
 
 </head>
+<?php
+use App\Models\User;
+
+$user = 0; 
+if(session()->has('LoggedUser')){
+    $user = User::where('userId', session('LoggedUser'))->first()->userId;
+}
+
+?>
 
 <body>
       <!-- 頁首 -->

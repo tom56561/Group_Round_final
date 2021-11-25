@@ -86,24 +86,7 @@
     </div>
     <!-- EventDetail -->
     <div class="container py-3">
-        <!-- <div>
-            <div class="pb-1">
-                <span>
-                    <span>2021/10/16 星期天</span>
-                </span>
-            </div>
-            <h1 class="text-main pb-2">陽明山健行 十人滿團</h1>
-            <div class="d-flex flex-row pb-2">
-                <div>
-                    <img class="rounded-circle bg-cover img-host"
-                        src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg" alt="">
-                </div>
-                <div class="ps-3">
-                    <span class="d-block">舉辦人</span>
-                    <span class="fw-bold">林啟德</span>
-                </div>
-            </div>
-        </div> -->
+        
         <div class="row">
             <div class="col-8">
                 <h1 class="text-main">{{$eventTitle}}</h1>
@@ -172,7 +155,12 @@
                         </div>
                         <div class="pt-2">
                             <img class="rounded-circle bg-cover img-host ms-4"
-                                src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg" alt="">
+                            @if (isset($tempuser))
+                                src="{{ asset('upload/'.$tempuser->userImg) }}" 
+                            @else
+                                src="{{ asset('upload/default_userImg.png') }}" 
+                            @endif
+                            alt="">
                             <div class="ms-3 form-floating d-inline-block align-middle">
                                 <textarea class="form-control" style="width: 470px;" placeholder="Leave a comment here"
                                     id="floatingTextarea"></textarea>
@@ -183,12 +171,26 @@
                         <div class="pt-3">
                             <div class="pt-3 d-flex flex-row">
                                 <img class="rounded-circle bg-cover img-host ms-4"
-                                    src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
+                                    src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                                     alt="">
                                 <div>
                                     <div class="ms-3 bg-white p-3 commentW border-card">
-                                        <span class="d-block pb-1">林啟德</span>
+                                        <span class="d-block pb-1">黃曉明</span>
                                         <span class="fw-light">請問是要在哪裡集合呢?</span>
+                                    </div>
+                                    <span class="ms-3 ps-3 fw-light fs-6">5小時前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3">
+                            <div class="pt-3 d-flex flex-row">
+                                <img class="rounded-circle bg-cover img-host ms-4"
+                                    src="https://media.istockphoto.com/photos/learn-to-love-yourself-first-picture-id1291208214"
+                                    alt="">
+                                <div>
+                                    <div class="ms-3 bg-white p-3 commentW border-card">
+                                        <span class="d-block pb-1">林大名</span>
+                                        <span class="fw-light">好心動 好想參加！</span>
                                     </div>
                                     <span class="ms-3 ps-3 fw-light fs-6">1天前</span>
                                 </div>
@@ -197,28 +199,14 @@
                         <div class="pt-3">
                             <div class="pt-3 d-flex flex-row">
                                 <img class="rounded-circle bg-cover img-host ms-4"
-                                    src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
+                                    src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
                                     alt="">
                                 <div>
                                     <div class="ms-3 bg-white p-3 commentW border-card">
-                                        <span class="d-block pb-1">林啟德</span>
-                                        <span class="fw-light">請問是要在哪裡集合呢?</span>
+                                        <span class="d-block pb-1">陳忠明</span>
+                                        <span class="fw-light">一個人的費用大概會是多少呢？</span>
                                     </div>
-                                    <span class="ms-3 ps-3 fw-light fs-6">1天前</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pt-3">
-                            <div class="pt-3 d-flex flex-row">
-                                <img class="rounded-circle bg-cover img-host ms-4"
-                                    src="https://secure.meetupstatic.com/photos/member/5/1/9/2/thumb_136640882.jpeg"
-                                    alt="">
-                                <div>
-                                    <div class="ms-3 bg-white p-3 commentW border-card">
-                                        <span class="d-block pb-1">林啟德</span>
-                                        <span class="fw-light">請問是要在哪裡集合呢?</span>
-                                    </div>
-                                    <span class="ms-3 ps-3 fw-light fs-6">1天前</span>
+                                    <span class="ms-3 ps-3 fw-light fs-6">2天前</span>
                                 </div>
                             </div>
                         </div>
@@ -288,7 +276,7 @@
 
                     {{-- 判斷活動是否已結束 --}}
                     @if (date('Y年m月d日')>$eventDateTime)
-                        <form method="get" action="/edit1/{{$id}}" enctype="multipart/form-data" class="d-inline">
+                        <form method="get" action="/actFeed_____E" enctype="multipart/form-data" class="d-inline">
                             @csrf
                         <input class="px-3 btn btn-danger " id="btn" type="submit" onclick="" value="評價回饋" />
                         </form>

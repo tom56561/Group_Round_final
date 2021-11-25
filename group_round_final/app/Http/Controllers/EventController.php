@@ -13,8 +13,10 @@ class EventController extends Controller
 {
     function index($id) {   //活動頁面
         if(session()->has('LoggedUser')){
-            $user = User::where('userId', session('LoggedUser'))->first()->userId;  //確認使用者是否登入，並取得userId
+            $tempuser = User::where('userId', session('LoggedUser'))->first();
+            $user = $tempuser->userId;  //確認使用者是否登入，並取得userId
         }else{
+            $tempuser = null;
             $user = 0;
         }
         
@@ -63,6 +65,8 @@ class EventController extends Controller
             "userLike",
             "holduser",
             "user",
+            "tempuser",
+            
         );
         // dd($viewModel);
         return view("event.eventPageC", $viewModel);
