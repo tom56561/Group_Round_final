@@ -115,7 +115,7 @@
         /* 彈出視窗會員泡泡的袋子 */
         #pickDiv{
             margin: 0 10px;
-            /* display: inline-block; */
+            
         }
         
         /* 自訂checkbox按鈕 */

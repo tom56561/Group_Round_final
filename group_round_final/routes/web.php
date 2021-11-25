@@ -38,7 +38,7 @@ Route::get('/memberF1', "App\Http\Controllers\MemberController@joinEvent")->name
 Route::get('/memberF2', "App\Http\Controllers\MemberController@createEvent")->name( 'member.create' )->middleware('isLogged')->middleware('alreadyLoggedIn');
 Route::get('/memberF3', "App\Http\Controllers\MemberController@finishedEvent")->name( 'member.finished' )->middleware('isLogged')->middleware('alreadyLoggedIn');
 Route::get('/memberF4', "App\Http\Controllers\MemberController@collectEvent")->name( 'member.collect' )->middleware('isLogged')->middleware('alreadyLoggedIn');
-Route::get('/memberF6', "App\Http\Controllers\MemberController@memberComment")->name( 'member.comment' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+
 
 // 修改會員資料
 Route::get('/memberF5', "App\Http\Controllers\MemberAlterController@index")->name( 'member.Alter' )->middleware('isLogged');
@@ -117,6 +117,6 @@ Route::post('edit/store3/{id}', 'App\Http\Controllers\EventController@edit3');
 
 //   ------------
 // feedback
-Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')->middleware('isLogged');;
-Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index')->middleware('isLogged');;
-Route::post('memberCommentF6', 'App\Http\Controllers\FeedbackController@store')->middleware('isLogged');;
+Route::get('actFeed_____E', 'App\Http\Controllers\FeedbackController@index1')->middleware('isLogged');
+Route::get('memberCommentF6', 'App\Http\Controllers\FeedbackController@index')->name( 'member.comment' )->middleware('isLogged')->middleware('alreadyLoggedIn');
+Route::post('memberCommentF6', 'App\Http\Controllers\FeedbackController@store')->middleware('isLogged');

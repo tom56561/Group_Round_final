@@ -12,11 +12,13 @@
                 <h3 style="color:gray;">尚未收藏活動</h3>
             </div>
         @else
-            <div class="AllCard">
+            <div class="AllCard" style="margin-bottom: 220px">
                 @foreach ($userLike as $like)
-                    <a href="#">
-                        <div class="card" id="card1">
-                            <img src="/img/{{ $like->event->eventImg }}" class="card-img-top" alt="...">
+                    <a href="/event/{{ $like->event->eventId }}">
+                        <div class="card" id="card">
+                            <div id="cardImg">
+                                <img src="/eventImg/{{ $like->event->eventImg }}" class="card-img-top" alt="...">
+                            </div>
                             <div class="card-body">
 
                                 <p class="card-text">{{ $like->event->eventTitle }}</p>

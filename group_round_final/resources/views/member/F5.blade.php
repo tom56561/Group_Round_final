@@ -34,17 +34,15 @@
                     
                 </script>
                
-
-                 <div id="userContents">
+               <div id="userContents">
                     <a href="{{ route('member.Alter') }}"><h4>修改基本資料</h4></a>
                     <a href="{{ route('member.create') }}"><h4>發起的活動</h4></a>
                     <a href="{{ route('member.join') }}"><h4>參加的活動</h4></a>
                     <a href="{{ route('member.collect') }}"><h4>收藏的活動</h4></a>
                     <a href="{{ route('member.finished') }}"><h4>已結束的活動</h4></a>
                     <a href="{{ route('member.comment') }}"><h4>團員回饋</h4></a>
-                        
-                </div>   
-
+    
+                </div>
             </div>
             
             <div id="rightDiv">

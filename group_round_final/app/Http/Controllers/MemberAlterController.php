@@ -83,7 +83,7 @@ class MemberAlterController extends Controller
     {
         $User = User::find($id);
         $tagCheckbox = $request->input('tagCheckbox');   // 接收興趣input
-        
+        // dd($User->cityId);
         // 判斷是否有選擇興趣
         if (isset($tagCheckbox)) {
             $userTag = implode(',', $tagCheckbox);  // 陣列轉字串
